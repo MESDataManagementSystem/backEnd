@@ -19,7 +19,7 @@ teachersInfoSchema = new mongoose.Schema({
     employeeStatus: { type: String, required: "Employee Status is required" },
     designation: { type: String, required: "Designation is required" },
     firstDayOfService: { type: Date, required: "First Day Of Service is required" },
-    dateOfLastPromotion: { type: Date, required: "date Of Last Promotion is required" },
+    dateOfLastPromotion: { type: Date, required: false},
     salaryGrade: { type: Number, required: "Salary Grade is required" },
     stepIncrement: { type: Number, required: "STEP Increment is required" },
     eligibility: { type: String, required: "Eligibility is required" },
@@ -27,9 +27,9 @@ teachersInfoSchema = new mongoose.Schema({
     depEdEmailAddress: { type: String, required: "DepEd Email Address is required" },
     tin: { type: String, required: "TIN is required" },
     philHealthNumber: { type: String, required: "PhilHealth Number is required" },
-    gsisBPNumber: { type: Number, required: "GSIS (BP) Number  is required" },
+    gsisBPNumber: { type: String, required: "GSIS (BP) Number  is required" },
     pagIbigNumber: { type: String, required: "PagIbig Number is required" },
-    availableServiceCredits: { type: mongoose.Decimal128, required: "Available Service Credits is required" },
+    availableServiceCredits: { type: String, required: "Available Service Credits is required" },
 })
 
 module.exports = mongoose.model('TeacherInfo', teachersInfoSchema);

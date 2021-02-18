@@ -7,7 +7,7 @@
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Passerelles numériques Philippines Scholars Batch2020B Group_7",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -16,8 +16,10 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.13",
-    "nodemon": "^2.0.7",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0"
+    "multer": "^1.4.2",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
