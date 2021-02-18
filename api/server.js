@@ -51,7 +51,7 @@ app.post('/uploadSingleFile', upload.single('files'), (req, res, next) => {
         });
     } catch (error) {
         return res.status(201).json({
-            message: 'Unable to upload file'
+            message: 'Unable to upload file!'
         });
     }
 });
