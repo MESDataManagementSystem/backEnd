@@ -35,7 +35,6 @@ exports.loginAdmin = (req, res) => {
         if (!user) {
             return res.status(400).json({ 'msg': 'The user does not exist' });
         }
- 
         user.comparePassword(req.body.password, (err, isMatch) => {
             if (isMatch && !err) {
                 return res.status(200).json({

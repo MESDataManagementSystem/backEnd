@@ -26,7 +26,7 @@ connection.once('open', () => {
 });
 connection.on('error', (err) => {
     console.log("MongoDB Connection Error. Please Make Sure MongoDB Is Running!");
-    process.exit();    
+    process.exit();
 })
 
 // Start the server
