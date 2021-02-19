@@ -72,7 +72,8 @@ exports.updateTeachersInfo = (req, res) => {
         pagIbigNumber: req.body.pagIbigNumber,
         availableServiceCredits: req.body.availableServiceCredits
     }
-    teachersInfo.findByIdAndUpdate({ _id: req.params.id }, data, (err, teacher) => {
+    teachersInfo.findByIdAndUpdate({ _id: req.body._id }, data, (err, teacher) => {
+        console.log(teacher)
         if (err) {
             return res.send({ error: err, status: false });
         }
