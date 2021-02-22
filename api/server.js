@@ -11,6 +11,8 @@ var cors = require('cors');
 var app = express();
 var server = require('http').createServer(app);
 
+var oldFile = require('./src/model/oldFiles-model');
+
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -45,15 +47,20 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 app.post('/uploadSingleFile', upload.single('files'), (req, res, next) => {
-    try {
-        return res.status(201).json({
-            message: 'File uploded successfully'
-        });
-    } catch (error) {
-        return res.status(201).json({
-            message: 'Unable to upload file!'
-        });
-    }
+    // var filename = req.body.fileUrl + req.file.filename 
+    var data = {fullname: req.body.name, lrn: req.body.lrn, fileUrl: req.file.filename };
+    console.log('filename : ', req.body.fileUrl + req.file.filename );
+    req.body.fileUrl = req.body.fileUrl + req.file.filename
+    let addFile = oldFile(req.body)
+    addFile.save((err, data) => {
+        if (err) {
+            console.log(err)
+            return res.status(400).json({ 'msg': err });
+        }
+        console.log('file uploaded successfully ! ', data);
+            return res.status(201).json(data);
+    })
+
 });
 
 app.post('/uploadMultipleFiles', upload.array('files', 100), (req, res, next) => {
@@ -69,7 +76,7 @@ app.post('/uploadMultipleFiles', upload.array('files', 100), (req, res, next) =>
 });
 
 // Connect to the Database
-mongoose.connect(config.onlineDb, {
+mongoose.connect(config.localDb, {
     useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true
 });
 const connection = mongoose.connection;
