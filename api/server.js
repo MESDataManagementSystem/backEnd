@@ -12,13 +12,14 @@ var app = express();
 var server = require('http').createServer(app);
 
 var oldFile = require('./src/model/oldFiles-model');
+app.use(cors());
 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
-app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Route
+
 app.use('/api', routes);
 
 const storage = multer.diskStorage({
