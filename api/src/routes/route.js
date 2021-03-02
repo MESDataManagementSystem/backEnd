@@ -25,6 +25,9 @@ routes.put('/updateSection/:id', addSectionController.updateSection);
 routes.get('/viewListOfOldFiles', studentController.viewListOfOldFiles);
 routes.post('/viewFile', studentController.viewFile);
 
+routes.post('/addStudent',studentController.addStudent);
+routes.get('/viewStudents',studentController.viewStudents);
+
 
 
 
