@@ -1,7 +1,7 @@
 var section = require("../model/gradeSection-model");
 
 exports.addSection = (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     section.findOne({ sectionName: req.body.sectionName }, (err, sections) => {
         if (err) {
             return res.status(400).json({ 'msg': err })
