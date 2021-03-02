@@ -3,8 +3,9 @@ var express = require('express'),
 
 var authenticationController = require("../controller/authentication-controller");
 var teachersInfoController = require("../controller/teachersInfo-controller");
-var addSectionController = require("../controller/addSection-controller");
+var addSectionController = require("../controller/gradeSection-controller");
 var studentController = require('../controller/studentInfo-controller');
+var gradeSectionController = require("../controller/gradeSection-controller");
 
 routes.get('/', (req, res) => { return res.send('Welcome Mantalongon Elementary School') }); //for testing only
 

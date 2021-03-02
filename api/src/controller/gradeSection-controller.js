@@ -1,6 +1,7 @@
 var section = require("../model/gradeSection-model");
 
 exports.addSection = (req, res) => {
+    // console.log(req.body)
     section.findOne({ sectionName: req.body.sectionName }, (err, sections) => {
         if (err) {
             return res.status(400).json({ 'msg': err })
@@ -19,7 +20,8 @@ exports.addSection = (req, res) => {
 }
 
 exports.viewSection = (req, res) => {
-    section.find({ _id: req.params.id })
+    console.log(req.params.id )
+    section.find({gradeLevel: req.params.id })
         .populate({
             path: 'adviser',
             model: 'TeacherInfo',
@@ -29,8 +31,10 @@ exports.viewSection = (req, res) => {
             if (err) {
                 return res.send({ error: err, status: false });
             }
+            console.log(section, "sections ");
             return res.send({ status: true, data: section })
         })
+
 }
 
 exports.deleteSection = (req, res) => {
