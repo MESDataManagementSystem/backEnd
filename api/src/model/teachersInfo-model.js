@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 teachersInfoSchema = new mongoose.Schema({
     lastName: { type: String, required: "Last Name is required" },
     firstName: { type: String, required: "First Name is required" },
-    middleName: { type: String, required: "Middle Name is required" },
+    middleName: { type: String, required: false },
     nameExt: { type: String, required: "Name Extension is required" },
     employeeNumber: { type: Number, required: "Employee Number is required" },
     itemNumber: { type: String, required: "Item Number is required" },
