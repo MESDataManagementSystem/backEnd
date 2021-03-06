@@ -17,7 +17,8 @@ studentsInfoSchema = new mongoose.Schema({
     studentOthers: {type: [String], required: false},
     studentNameAdressOfTestingCenter: {type: String, required: true, trim: true},
     studentRemark: {type: Number, required: true, trim: true},
-    studentsection: {type: String, required: true, trim: true}
+    studentSection: {type: String, required: true, trim: true},
+    studentGrade: {type: String, required: true, trim: true}
 })
 
 module.exports = mongoose.model("StudentInfo", studentsInfoSchema);

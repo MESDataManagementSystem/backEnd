@@ -7,7 +7,9 @@ function createToken(user) {
         expiresIn: 2000 // 86400 expires in 24 hours
     })
 }
-
+function createTokenSection(section){
+    return jwt.sign({section: section}, config.jwtSecret)
+}
 exports.registerUser = (req, res) => {
     User.findOne({ username: req.body.username }, (err, user) => {
         if (err) {

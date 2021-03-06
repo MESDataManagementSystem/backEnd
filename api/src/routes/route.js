@@ -21,12 +21,16 @@ routes.post('/addSection', addSectionController.addSection);
 routes.delete('/deleteSection/:id', addSectionController.deleteSection);
 routes.get('/viewSection/:id', addSectionController.viewSection);
 routes.put('/updateSection/:id', addSectionController.updateSection);
+routes.get('/viewStudents/:section',studentController.viewStudents);
+routes.get('/generateSection/:section', studentController.createTokenSection);
+routes.get('/findGrade/:grade', studentController.findGrade);
 
 routes.get('/viewListOfOldFiles', studentController.viewListOfOldFiles);
 routes.post('/viewFile', studentController.viewFile);
 
 routes.post('/addStudent',studentController.addStudent);
-routes.get('/viewStudents',studentController.viewStudents);
+routes.get('/findStudent/:id', studentController.findStudent);
+routes.post('/updateStudent/:id', studentController.findStudent);
 
 
 
