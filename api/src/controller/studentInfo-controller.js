@@ -74,27 +74,27 @@ exports.findGrade = (req, res) =>{
 // update student
 exports.updateStudent = (req, res) => {
     console.log('okii dayy')
-    var studentInfo = {
-        studentLastName: req.body.studentLastName,
-        studentFirstName: req.body.studentFirstName,
-        studentNameExtn: req.body.studentNameExtn,
-        studentMiddleName: '',
-        studentLRN: '',
-        studentBirthdate: '',
-        studentSex: '',
-        studentCredentialPresentedForGrade: [],
-        studentNameOfSchoolFromKinder: '',
-        studentSchoolId: '',
-        studentSchoolAddress: '',
-        studentPeptPasserRating: '',
-        studentDateOfxamination: '',
-        studentOthers: '',
-        studentNameAdressOfTestingCenter: '',
-        studentRemark: '',
-        studentSection: ''
-      };
+    // var studentInfo = {
+    //     studentLastName:'' ,
+    //     studentFirstName: '',
+    //     studentNameExtn: '',
+    //     studentMiddleName:'',
+    //     studentLRN: '',
+    //     studentBirthdate: '',
+    //     studentSex: '',
+    //     studentCredentialPresentedForGrade: [],
+    //     studentNameOfSchoolFromKinder: '',
+    //     studentSchoolId: '',
+    //     studentSchoolAddress: '',
+    //     studentPeptPasserRating: '',
+    //     studentDateOfxamination: '',
+    //     studentOthers: '',
+    //     studentNameAdressOfTestingCenter: '',
+    //     studentRemark: '',
+    //     studentSection: ''
+    //   };
     console.log(req.body);
-    studentInfo.findByIdAndUpdate({_id: req.params.id}, studentInfo,(err, student) =>{
+    studentInfo.findByIdAndUpdate({_id: req.params.id}, req.body,(err, student) =>{
         if(err){
             return res.send({error: err, status: false});
         }
