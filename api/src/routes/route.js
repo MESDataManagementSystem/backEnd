@@ -20,8 +20,15 @@ routes.post('/addSection', gradeSectionController.addSection);
 routes.delete('/deleteSection/:id', gradeSectionController.deleteSection);
 routes.get('/viewSection/:id', gradeSectionController.viewSection);
 routes.put('/updateSection/:id', gradeSectionController.updateSection);
+routes.get('/viewStudents/:section', studentController.viewStudents);
+routes.get('/generateSection/:section', studentController.createTokenSection);
+routes.get('/findGrade/:grade', studentController.findGrade);
 
 routes.get('/viewListOfOldFiles', studentController.viewListOfOldFiles);
 routes.post('/viewFile', studentController.viewFile);
+
+routes.post('/addStudent', studentController.addStudent);
+routes.get('/findStudent/:id', studentController.findStudent);
+routes.post('/updateStudent/:id', studentController.findStudent);
 
 module.exports = routes;

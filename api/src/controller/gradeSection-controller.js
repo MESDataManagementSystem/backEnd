@@ -1,5 +1,8 @@
 var section = require("../model/gradeSection-model");
 
+
+
+
 exports.addSection = (req, res) => {
     section.findOne({ sectionName: req.body.sectionName }, (err, sections) => {
         if (err) {
@@ -30,7 +33,6 @@ exports.viewSection = (req, res) => {
             if (err) {
                 return res.send({ error: err, status: false });
             }
-            console.log(section, "sections ");
             return res.send({ status: true, data: section })
         })
 
