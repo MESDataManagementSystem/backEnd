@@ -3,9 +3,8 @@ var express = require('express'),
 
 var authenticationController = require("../controller/authentication-controller");
 var teachersInfoController = require("../controller/teachersInfo-controller");
-var addSectionController = require("../controller/gradeSection-controller");
-var studentController = require('../controller/studentInfo-controller');
 var gradeSectionController = require("../controller/gradeSection-controller");
+var studentController = require('../controller/studentInfo-controller');
 
 routes.get('/', (req, res) => { return res.send('Welcome Mantalongon Elementary School') }); //for testing only
 
@@ -17,15 +16,12 @@ routes.put('/updateTeachersInfo/:id', teachersInfoController.updateTeachersInfo)
 routes.get('/viewTeachersInfo/:id', teachersInfoController.viewTeachersInfo);
 routes.get('/viewListOfTeacher', teachersInfoController.viewListOfTeachers);
 
-routes.post('/addSection', addSectionController.addSection);
-routes.delete('/deleteSection/:id', addSectionController.deleteSection);
-routes.get('/viewSection/:id', addSectionController.viewSection);
-routes.put('/updateSection/:id', addSectionController.updateSection);
+routes.post('/addSection', gradeSectionController.addSection);
+routes.delete('/deleteSection/:id', gradeSectionController.deleteSection);
+routes.get('/viewSection/:id', gradeSectionController.viewSection);
+routes.put('/updateSection/:id', gradeSectionController.updateSection);
 
 routes.get('/viewListOfOldFiles', studentController.viewListOfOldFiles);
 routes.post('/viewFile', studentController.viewFile);
-
-
-
 
 module.exports = routes;

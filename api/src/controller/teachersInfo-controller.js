@@ -70,7 +70,8 @@ exports.updateTeachersInfo = (req, res) => {
         philHealthNumber: req.body.philHealthNumber,
         gsisBPNumber: req.body.gsisBPNumber,
         pagIbigNumber: req.body.pagIbigNumber,
-        availableServiceCredits: req.body.availableServiceCredits
+        availableServiceCredits: req.body.availableServiceCredits,
+        activeStatus: req.body.activeStatus
     }
     teachersInfo.findByIdAndUpdate({ _id: req.body._id }, data, (err, teacher) => {
         if (err) {

@@ -10,7 +10,6 @@ exports.viewListOfOldFiles= (function (req, res) {
 });
 
 exports.viewFile = (function ( req, res){
-    console.log('return sa viewFile :: ', req.body);
     return res.send({status: true, data: req.body});
 })
 

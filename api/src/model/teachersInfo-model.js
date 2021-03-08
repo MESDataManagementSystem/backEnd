@@ -30,6 +30,7 @@ teachersInfoSchema = new mongoose.Schema({
     gsisBPNumber: { type: String, required: "GSIS (BP) Number  is required" },
     pagIbigNumber: { type: String, required: "PagIbig Number is required" },
     availableServiceCredits: { type: String, required: "Available Service Credits is required" },
+    activeStatus: { type: String, required: "active status is required" }
 })
 
 module.exports = mongoose.model('TeacherInfo', teachersInfoSchema);
