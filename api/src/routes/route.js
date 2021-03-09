@@ -30,7 +30,7 @@ routes.post('/viewFile', studentController.viewFile);
 
 routes.post('/addStudent',studentController.addStudent);
 routes.get('/findStudent/:id', studentController.findStudent);
-routes.post('/updateStudent/:id', studentController.findStudent);
+routes.post('/updateStudent/:id', studentController.updateStudent);
 
 
 

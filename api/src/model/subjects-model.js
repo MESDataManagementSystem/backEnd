@@ -16,7 +16,8 @@ subjects = new mongoose.Schema({
     health: {type: Number, required: false},
     edukasyonSaPagpapakatao: {type: Number, required: false},
     arabicLanguage: {type: Number, required: false},
-    islamicLanguage: {type: Number, required: false}
+    islamicLanguage: {type: Number, required: false},
+    quarter: {type: Number, required: true}
 })
 
 module.exports = mongoose.model("Subjects", subjects);
