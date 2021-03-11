@@ -30,12 +30,22 @@ exports.viewFile = (function ( req, res){
 
 // add new student
 exports.addStudent = (function (req, res){
-    studentInfo(req.body).save((err, student) => {
-        if (err) {
-            return res.status(400).json({ 'msg': err })
+    console.log(req.body)
+    studentInfo.findOne({studentLRN: req.body.studentLRN}, (err, student)=> {
+        if(student){
+            return res.send({status: true, msg: 'LRN already exists!'})
+        }else{
+            studentInfo(req.body).save((err, msg) => {
+                if (err) {
+                    return res.send({error: err, status: false})
+                }
+                return res.send({status:true,  msg: 'Student Added!'})
+
+            })
+            console.log('not active')
         }
-        return res.status(200).json(student);
     })
+
 })
 
 // view List of students in specific section
@@ -71,35 +81,37 @@ exports.findGrade = (req, res) =>{
     })
 }
 
+
 // update student
 exports.updateStudent = (req, res) => {
     console.log('okii dayy')
-    // var studentInfo = {
-    //     studentLastName:'' ,
-    //     studentFirstName: '',
-    //     studentNameExtn: '',
-    //     studentMiddleName:'',
-    //     studentLRN: '',
-    //     studentBirthdate: '',
-    //     studentSex: '',
-    //     studentCredentialPresentedForGrade: [],
-    //     studentNameOfSchoolFromKinder: '',
-    //     studentSchoolId: '',
-    //     studentSchoolAddress: '',
-    //     studentPeptPasserRating: '',
-    //     studentDateOfxamination: '',
-    //     studentOthers: '',
-    //     studentNameAdressOfTestingCenter: '',
-    //     studentRemark: '',
-    //     studentSection: ''
-    //   };
     console.log(req.body);
-    studentInfo.findByIdAndUpdate({_id: req.params.id}, req.body,(err, student) =>{
-        if(err){
-            return res.send({error: err, status: false});
+    var request = req.body;
+ 
+    if( request.studentLastName
+        && request.studentFirstName
+        && request.studentLRN
+        && request.studentBirthdate
+        && request.studentSex
+        && request.studentNameOfSchoolFromKinder
+        && request.studentSchoolId
+        && request.studentSchoolAddress
+        && request.studentPeptPasserRating
+        && request.studentDateOfxamination
+        && request.studentNameAdressOfTestingCenter
+        && request.studentRemark
+        && request.studentSection
+        && request.studentGrade){
+            studentInfo.findByIdAndUpdate({_id: req.params.id}, req.body,(err, student) =>{
+                if(err){
+                    return res.send({error: err, status: false});
+                }
+                return res.send({status: true, data: student});
+            })
+        }else{
+            return res.send({status: false, msg: 'error' });
         }
-        return res.send({status: true, data: student});
-    })
+
 }
 
 

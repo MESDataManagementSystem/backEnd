@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 subjects = new mongoose.Schema({
-    lrn: {type: Number, required: true},
+    studentId: {type: String, required: true},
     motherTongue: {type: Number, required: true},
     filipino: {type: Number, required: true},
     english: {type: Number, required: true},
@@ -17,7 +17,7 @@ subjects = new mongoose.Schema({
     edukasyonSaPagpapakatao: {type: Number, required: false},
     arabicLanguage: {type: Number, required: false},
     islamicLanguage: {type: Number, required: false},
-    quarter: {type: Number, required: true}
+    quarter: {type: String, required: true}
 })
 
 module.exports = mongoose.model("Subjects", subjects);

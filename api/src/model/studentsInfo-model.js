@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 studentsInfoSchema = new mongoose.Schema({
-    studentLastName: {type: String, required: "Student's last name is required."},
-    studentFirstName: {type: String, required: "Student's first name is required."},
+    studentLastName: {type: String, required: true},
+    studentFirstName: {type: String, required: true},
     studentNameExtn: {type: String, required: false},
     studentMiddleName: {type: String, required: false},
     studentLRN: {type: Number, required: "Student's LRN is required."},
