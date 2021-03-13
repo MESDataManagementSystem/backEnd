@@ -14,7 +14,7 @@ routes.post('/login', authenticationController.loginUser);
 routes.post('/addTeachersInfo', teachersInfoController.addTeachersInfo);
 routes.put('/updateTeachersInfo/:id', teachersInfoController.updateTeachersInfo);
 routes.get('/viewTeachersInfo/:id', teachersInfoController.viewTeachersInfo);
-routes.get('/viewListOfTeacher', teachersInfoController.viewListOfTeachers);
+routes.get('/viewListOfTeacher/:activeStatus', teachersInfoController.viewListOfTeachers);
 
 routes.post('/addSection', gradeSectionController.addSection);
 routes.delete('/deleteSection/:id', gradeSectionController.deleteSection);
