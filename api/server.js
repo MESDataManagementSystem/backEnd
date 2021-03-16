@@ -6,21 +6,21 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var routes = require('./src/routes/route');
 var fileRoute = require('./src/routes/fileRoute')
+require('rootpath')();
 var multer = require('multer');
 var path = require('path');
 var cors = require('cors');
 var app = express();
 var server = require('http').createServer(app);
-
 var oldFile = require('./src/model/oldFiles-model');
-app.use(cors());
 
+
+app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Route
-// app.use('/api', fileRoute)
 app.use('/api', routes);
 
 const storage = multer.diskStorage({
@@ -71,18 +71,6 @@ app.post('/uploadSingleFile', upload.single('files'), (req, res, next) => {
         })
     })
 });
-
-// app.post('/uploadMultipleFiles', upload.array('files', 100), (req, res, next) => {
-//     try {
-//         return res.status(201).json({
-//             message: 'File uploded successfully'
-//         });
-//     } catch (error) {
-//         return res.status(201).json({
-//             message: 'Unable to upload files'
-//         });
-//     }
-// });
 
 // Connect to the Database
 mongoose.connect(config.onlineDb, {
