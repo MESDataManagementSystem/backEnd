@@ -31,7 +31,7 @@ exports.viewTeachersInfo = (req, res) => {
 }
 
 exports.viewListOfTeachers = (function (req, res) {
-    teachersInfo.find(function (err, teacher) {
+    teachersInfo.find({ activeStatus: req.params.activeStatus }, function (err, teacher) {
         if (err) {
             return res.send({ error: err, status: false });
         }
@@ -70,7 +70,8 @@ exports.updateTeachersInfo = (req, res) => {
         philHealthNumber: req.body.philHealthNumber,
         gsisBPNumber: req.body.gsisBPNumber,
         pagIbigNumber: req.body.pagIbigNumber,
-        availableServiceCredits: req.body.availableServiceCredits
+        availableServiceCredits: req.body.availableServiceCredits,
+        activeStatus: req.body.activeStatus
     }
     teachersInfo.findByIdAndUpdate({ _id: req.body._id }, data, (err, teacher) => {
         if (err) {

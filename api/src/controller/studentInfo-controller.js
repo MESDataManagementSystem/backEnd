@@ -21,7 +21,6 @@ exports.viewListOfOldFiles= (function (req, res) {
 });
 // sending url for the pdf
 exports.viewFile = (function ( req, res){
-    console.log('return sa viewFile :: ', req.body);
     return res.send({status: true, data: req.body});
 })
 

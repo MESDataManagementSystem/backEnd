@@ -7,6 +7,7 @@ gradeSectionSchema = new mongoose.Schema({
     adviser: { type: mongoose.Schema.Types.ObjectId, ref: TeacherInfo, required: "Adviser's Name is required" },
     year: { type: String, required: "School year is required" }
 
+
 })
 
 module.exports = mongoose.model('GradeSection', gradeSectionSchema);

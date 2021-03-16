@@ -5,6 +5,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var routes = require('./src/routes/route');
+var fileRoute = require('./src/routes/fileRoute')
 var multer = require('multer');
 var path = require('path');
 var cors = require('cors');
@@ -19,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Route
-
+// app.use('/api', fileRoute)
 app.use('/api', routes);
 
 const storage = multer.diskStorage({
@@ -28,7 +29,8 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         console.log(file);
-        cb(null, Date.now() + path.extname(file.originalname));
+        // cb(null, Date.now() + path.extname(file.originalname));
+        cb(null, file.originalname)
     }
 })
 
@@ -37,7 +39,8 @@ const fileFilter = (req, file, cb) => {
         file.mimetype == 'image/png' ||
         file.mimetype == 'image/jpg' ||
         file.mimetype == 'application/pdf' ||
-        file.mimetype == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+        file.mimetype == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    ) {
         cb(null, true);
     } else {
         cb(null, false);
@@ -48,36 +51,41 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 app.post('/uploadSingleFile', upload.single('files'), (req, res, next) => {
-    // var filename = req.body.fileUrl + req.file.filename 
-    var data = {fullname: req.body.name, lrn: req.body.lrn, fileUrl: req.file.filename };
-    console.log('filename : ', req.body.fileUrl + req.file.filename );
+    // var data = { fullname: req.body.name, lrn: req.body.lrn, fileUrl: req.file.filename };
     req.body.fileUrl = req.body.fileUrl + req.file.filename
-    let addFile = oldFile(req.body)
-    addFile.save((err, data) => {
+    oldFile.findOne({ lrn: req.body.lrn }, (err, user) => {
         if (err) {
-            console.log(err)
-            return res.status(400).json({ 'msg': err });
+            return res.status(400).json({ 'msg': err })
         }
-        console.log('file uploaded successfully ! ', data);
+        if (user) {
+            return res.status(400).json({ 'msg': "LRN Already Exist" })
+        }
+        let addFile = oldFile(req.body)
+        addFile.save((err, data) => {
+            if (err) {
+                console.log(err)
+                return res.status(400).json({ 'msg': err });
+            }
+            console.log('file uploaded successfully ! ', data);
             return res.status(201).json(data);
+        })
     })
-
 });
 
-app.post('/uploadMultipleFiles', upload.array('files', 100), (req, res, next) => {
-    try {
-        return res.status(201).json({
-            message: 'File uploded successfully'
-        });
-    } catch (error) {
-        return res.status(201).json({
-            message: 'Unable to upload files'
-        });
-    }
-});
+// app.post('/uploadMultipleFiles', upload.array('files', 100), (req, res, next) => {
+//     try {
+//         return res.status(201).json({
+//             message: 'File uploded successfully'
+//         });
+//     } catch (error) {
+//         return res.status(201).json({
+//             message: 'Unable to upload files'
+//         });
+//     }
+// });
 
 // Connect to the Database
-mongoose.connect(config.localDb, {
+mongoose.connect(config.onlineDb, {
     useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true
 });
 const connection = mongoose.connection;

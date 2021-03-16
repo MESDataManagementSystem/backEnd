@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 teachersInfoSchema = new mongoose.Schema({
     lastName: { type: String, required: "Last Name is required" },
     firstName: { type: String, required: "First Name is required" },
-    middleName: { type: String, required: "Middle Name is required" },
+    middleName: { type: String, required: false },
     nameExt: { type: String, required: "Name Extension is required" },
     employeeNumber: { type: Number, required: "Employee Number is required" },
     itemNumber: { type: String, required: "Item Number is required" },
@@ -30,6 +30,7 @@ teachersInfoSchema = new mongoose.Schema({
     gsisBPNumber: { type: String, required: "GSIS (BP) Number  is required" },
     pagIbigNumber: { type: String, required: "PagIbig Number is required" },
     availableServiceCredits: { type: String, required: "Available Service Credits is required" },
+    activeStatus: { type: String, required: "active status is required" }
 })
 
 module.exports = mongoose.model('TeacherInfo', teachersInfoSchema);

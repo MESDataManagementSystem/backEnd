@@ -5,7 +5,6 @@ var subjects = require("../model/subjects-model");
 
 
 exports.addSection = (req, res) => {
-    // console.log(req.body)
     section.findOne({ sectionName: req.body.sectionName }, (err, sections) => {
         if (err) {
             return res.status(400).json({ 'msg': err })

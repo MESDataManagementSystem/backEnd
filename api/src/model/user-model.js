@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt');
 userSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: "username is required" },
     password: { type: String, required: "password is required" },
-    email: { type: String, required: false }
+    role: { type: String, required: true }
 })
 
 userSchema.pre('save', function (next) {
@@ -20,12 +20,15 @@ userSchema.pre('save', function (next) {
     })
 })
 
-userSchema.methods.comparePassword = function (hashedPassword) {
+userSchema.methods.comparePassword = function (password, hashedPassword) {
     // bcrypt.compare(hashedPassword, this.password,(err, isMatch) => {
     //     if (err) return cb(err);
     //     cb(null, isMatch)
     // })
-    return bcrypt.compareSync(hashedPassword, this.password);
+    console.log(hashedPassword);
+    console.log(password);
+    const result = bcrypt.compareSync(hashedPassword, password);
+    console.log(result);
+    return result;
 }
-
 module.exports = mongoose.model('User', userSchema);
