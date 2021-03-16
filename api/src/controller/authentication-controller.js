@@ -8,10 +8,6 @@ function createToken(user) {
     })
 }
 
-// function createTokenSection(section){
-//     return jwt.sign({section: section}, config.jwtSecret)
-// }
-
 exports.registerUser = (req, res) => {
     User.findOne({ username: req.body.username }, (err, user) => {
         if (err) {
@@ -31,6 +27,7 @@ exports.registerUser = (req, res) => {
 }
 
 exports.loginUser = (req, res) => {
+    console.log(req.body);
     User.findOne({ username: req.body.username }, (err, user) => {
         if (err) {
             return res.status(400).send({ 'msg': err })
@@ -38,15 +35,15 @@ exports.loginUser = (req, res) => {
         if (!user) {
             return res.status(400).json({ 'msg': 'The user does not exist' })
         }
-        user.comparePassword(req.body.password, (err, isMatch) => {
-            if (isMatch && !err) {
-                return res.status(200).json({
-                    token: createToken(user)
-                });
-            } else {
-                return res.status(400).json({ msg: 'The username and password don\'t match' });
-            }
-        });
+        const isMatch = user.comparePassword(user.password, req.body.password);
+        if (isMatch) {
+            return res.status(200).json({
+                token: createToken(user)
+            });
+        } else {
+            return res.status(400).json({ msg: 'The username and password don\'t match' });
+        }
+
     });
 };
 
