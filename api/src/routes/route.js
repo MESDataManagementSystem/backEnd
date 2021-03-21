@@ -5,6 +5,7 @@ var authenticationController = require("../controller/authentication-controller"
 var teachersInfoController = require("../controller/teachersInfo-controller");
 var gradeSectionController = require("../controller/gradeSection-controller");
 var studentController = require('../controller/studentInfo-controller');
+var teacherSideDashboardController = require('../controller/teachersideDashboard')
 
 routes.get('/', (req, res) => { return res.send('Welcome Mantalongon Elementary School') }); //for testing only
 
@@ -34,5 +35,7 @@ routes.post('/updateStudentGrades/:id', gradeSectionController.updateStudentGrad
 routes.post('/addStudentGrades', gradeSectionController.addStudentGrades);
 routes.get('/findQuarter/:id', gradeSectionController.findQuarter);
 
+
+routes.get('/findAdviser/:id',teacherSideDashboardController.findAdviser)
 
 module.exports = routes;
