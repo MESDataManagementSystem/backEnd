@@ -5,9 +5,19 @@ var bcrypt = require('bcrypt');
 
 
 function createToken(user) {
-    return jwt.sign({ id: user.id, username: user.username, role: user.role }, config.jwtSecret, {
-        expiresIn: 2000 // 86400 expires in 24 hours
-    })
+    if(user.role === 'Teacher'){
+        console.log(user)
+        return jwt.sign({ id: user, username: user.username,  role: user.role, adviserId: user.adviser }, config.jwtSecret, {
+            expiresIn: 2000 // 86400 expires in 24 hours
+        })
+    }
+    if(user.role === 'Admin'){
+        console.log(user)
+        return jwt.sign({ id: user, username: user.username,  role: user.role }, config.jwtSecret, {
+            expiresIn: 2000 // 86400 expires in 24 hours
+        })
+    }
+ 
 }
 
 // Adding Acount
@@ -41,8 +51,9 @@ exports.loginUser = (req, res) => {
         }
         const isMatch = user.comparePassword(user.password, req.body.password);
         if (isMatch) {
-            return res.status(200).send({
-                token: createToken(user)
+            return res.status(200).json({
+                token: createToken(user),
+                  data:user
             });
             // return res.send({status: true, user})
         } else {
