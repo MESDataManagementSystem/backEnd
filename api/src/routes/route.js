@@ -10,6 +10,12 @@ routes.get('/', (req, res) => { return res.send('Welcome Mantalongon Elementary 
 
 routes.post('/register', authenticationController.registerUser);
 routes.post('/login', authenticationController.loginUser);
+routes.get('/getCredentials/:role', authenticationController.getCredentials);
+routes.get('/viewTeacherAccount/:role', authenticationController.viewTeacherAccount);
+routes.get('/findAccount/:id', authenticationController.findAccount);
+routes.put('/updateTeacherCredentials:role', authenticationController.updateTeacherCredentials);
+routes.put('/updateCredentials/:role', authenticationController.updateCredentials);
+routes.delete('/removeAccount/:id', authenticationController.removeAccount);
 
 routes.post('/addTeachersInfo', teachersInfoController.addTeachersInfo);
 routes.put('/updateTeachersInfo/:id', teachersInfoController.updateTeachersInfo);
@@ -31,7 +37,7 @@ routes.get('/findStudent/:id', studentController.findStudent);
 routes.get('/findGrade/:grade', studentController.findGrade);
 routes.get('/viewListOfOldFiles', studentController.viewListOfOldFiles);
 routes.post('/viewFile', studentController.viewFile);
-routes.post('/updateStudent/:id', studentController.updateStudent );
-routes.post('/addStudent',studentController.addStudent);
+routes.post('/updateStudent/:id', studentController.updateStudent);
+routes.post('/addStudent', studentController.addStudent);
 
 module.exports = routes;

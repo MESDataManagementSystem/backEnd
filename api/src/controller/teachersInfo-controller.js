@@ -30,6 +30,7 @@ exports.viewTeachersInfo = (req, res) => {
     })
 }
 
+// View Teachers List 
 exports.viewListOfTeachers = (function (req, res) {
     teachersInfo.find({ activeStatus: req.params.activeStatus }, function (err, teacher) {
         if (err) {

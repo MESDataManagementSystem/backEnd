@@ -1,9 +1,12 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var TeacherInfo = require("../model/teachersInfo-model");
+
 
 userSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: "username is required" },
     password: { type: String, required: "password is required" },
+    adviser: { type: mongoose.Schema.Types.ObjectId, ref: TeacherInfo, required: true, unique: true },
     role: { type: String, required: true }
 })
 
@@ -21,14 +24,7 @@ userSchema.pre('save', function (next) {
 })
 
 userSchema.methods.comparePassword = function (password, hashedPassword) {
-    // bcrypt.compare(hashedPassword, this.password,(err, isMatch) => {
-    //     if (err) return cb(err);
-    //     cb(null, isMatch)
-    // })
-    console.log(hashedPassword);
-    console.log(password);
     const result = bcrypt.compareSync(hashedPassword, password);
-    console.log(result);
     return result;
 }
 
