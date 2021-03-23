@@ -1,7 +1,10 @@
 var User = require('../model/user-model');
+var teachersInfo = require('../model/teachersInfo-model');
 var config = require('../config/config');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
+var ObjectId = require('mongodb').ObjectID;
+const { countDocuments } = require('../model/teachersInfo-model');
 
 
 function createToken(user) {
@@ -146,3 +149,52 @@ exports.removeAccount = (function (req, res, next) {
         }
     })
 })
+
+// find specific teacher
+exports.findTeacher = (req, res) => {
+   teachersInfo.aggregate([ { $match : { _id :  ObjectId(req.params.id) } }, {$project: {"_id":0, lastName: 1, firstName: 1, middleName:1} }], (err, response) => {
+       if(err){
+           return res.send(err)
+       }
+       return res.send(response)
+   })
+}
+
+// view no advisory teachers
+exports.teacherNoAccount = (function (req, res) {
+    var teachersNoAccount =[]
+    teachersInfo.aggregate([
+        {
+          $lookup:
+            {
+              from: "users",
+              localField: "_id",
+              foreignField: "adviser",
+              as: "Teachers"
+            }
+       }
+     ], (err, response) => {
+         if(err){
+             return res.send(err)
+         }
+         response.forEach(teacher => {
+             if(teacher.Teachers.length == 0 && teacher.activeStatus == 'yes'){
+                 console.log('wala')
+                 var teacher = {_id: teacher._id, firstName: teacher.firstName, middleName:teacher.middleName, lastName: teacher.lastName, }
+                 teachersNoAccount.push(teacher)
+             }else{
+                console.log('naa')
+             }
+         });
+         return res.send(teachersNoAccount);
+     })
+    // teachersInfo.find({ activeStatus: req.params.activeStatus }, function (err, teacher) {
+    //     if (err) {
+    //         return res.send({ error: err, status: false });
+    //     }
+    //     return res.send({ status: true, data: teacher });
+    // });
+});
+
+
+ 
