@@ -2,7 +2,7 @@ var section = require("../model/gradeSection-model");
 var subjects = require("../model/subjects-model");
 
 exports.addSection = (req, res) => {
-    section.findOne({ sectionName: req.body.sectionName }, (err, sections) => {
+    section.findOne({ sectionName: req.body.sectionName.toLowerCase() }, (err, sections) => {
         if (err) {
             return res.status(400).json({ 'msg': err })
         }
@@ -95,8 +95,6 @@ exports.updateStudentGrades = (req, res) => {
         && request.arts
         && request.health
         && request.edukasyonSaPagpapakatao
-        && request.arabicLanguage
-        && request.islamicLanguage
         && request.quarter) {
         subjects.findByIdAndUpdate({ _id: req.body._id }, req.body, (err, data) => {
             if (err) {

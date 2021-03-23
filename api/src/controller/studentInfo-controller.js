@@ -89,13 +89,13 @@ exports.updateStudent = (req, res) => {
         && request.studentLRN
         && request.studentBirthdate
         && request.studentSex
-        && request.studentNameOfSchoolFromKinder
-        && request.studentSchoolId
-        && request.studentSchoolAddress
-        && request.studentPeptPasserRating
-        && request.studentDateOfxamination
-        && request.studentNameAdressOfTestingCenter
-        && request.studentRemark
+        // && request.studentNameOfSchoolFromKinder
+        // && request.studentSchoolId
+        // && request.studentSchoolAddress
+        // && request.studentPeptPasserRating
+        // && request.studentDateOfxamination
+        // && request.studentNameAdressOfTestingCenter
+        // && request.studentRemark
         && request.studentSection
         && request.studentGrade) {
         studentInfo.findByIdAndUpdate({ _id: req.params.id }, req.body, (err, student) => {
