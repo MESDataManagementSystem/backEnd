@@ -8,19 +8,19 @@ const { countDocuments } = require('../model/teachersInfo-model');
 
 
 function createToken(user) {
-    if(user.role === 'Teacher'){
+    if (user.role === 'Teacher') {
         console.log(user)
-        return jwt.sign({ id: user, username: user.username,  role: user.role, adviserId: user.adviser }, config.jwtSecret, {
+        return jwt.sign({ id: user, username: user.username, role: user.role, adviserId: user.adviser }, config.jwtSecret, {
             expiresIn: 2000 // 86400 expires in 24 hours
         })
     }
-    if(user.role === 'Admin'){
+    if (user.role === 'Admin') {
         console.log(user)
-        return jwt.sign({ id: user, username: user.username,  role: user.role }, config.jwtSecret, {
+        return jwt.sign({ id: user, username: user.username, role: user.role }, config.jwtSecret, {
             expiresIn: 2000 // 86400 expires in 24 hours
         })
     }
- 
+
 }
 
 // Adding Acount
@@ -56,7 +56,7 @@ exports.loginUser = (req, res) => {
         if (isMatch) {
             return res.status(200).json({
                 token: createToken(user),
-                  data:user
+                data: user
             });
             // return res.send({status: true, user})
         } else {
@@ -152,49 +152,49 @@ exports.removeAccount = (function (req, res, next) {
 
 // find specific teacher
 exports.findTeacher = (req, res) => {
-   teachersInfo.aggregate([ { $match : { _id :  ObjectId(req.params.id) } }, {$project: {"_id":0, lastName: 1, firstName: 1, middleName:1} }], (err, response) => {
-       if(err){
-           return res.send(err)
-       }
-       return res.send(response)
-   })
+    teachersInfo.aggregate([
+        {
+            $match: { _id: ObjectId(req.params.id) }
+        },
+        {
+            $project: { "_id": 0, lastName: 1, firstName: 1, middleName: 1 }
+        }
+    ], (err, response) => {
+        if (err) {
+            return res.send(err)
+        }
+        return res.send(response)
+    })
 }
 
 // view no advisory teachers
 exports.teacherNoAccount = (function (req, res) {
-    var teachersNoAccount =[]
+    var teachersNoAccount = []
     teachersInfo.aggregate([
         {
-          $lookup:
+            $lookup:
             {
-              from: "users",
-              localField: "_id",
-              foreignField: "adviser",
-              as: "Teachers"
+                from: "users",
+                localField: "_id",
+                foreignField: "adviser",
+                as: "Teachers"
             }
-       }
-     ], (err, response) => {
-         if(err){
-             return res.send(err)
-         }
-         response.forEach(teacher => {
-             if(teacher.Teachers.length == 0 && teacher.activeStatus == 'yes'){
-                 console.log('wala')
-                 var teacher = {_id: teacher._id, firstName: teacher.firstName, middleName:teacher.middleName, lastName: teacher.lastName, }
-                 teachersNoAccount.push(teacher)
-             }else{
+        }
+    ], (err, response) => {
+        if (err) {
+            return res.send(err)
+        }
+        response.forEach(teacher => {
+            if (teacher.Teachers.length == 0 && teacher.activeStatus == 'yes') {
+                console.log('wala')
+                var teacher = { _id: teacher._id, firstName: teacher.firstName, middleName: teacher.middleName, lastName: teacher.lastName, }
+                teachersNoAccount.push(teacher)
+            } else {
                 console.log('naa')
-             }
-         });
-         return res.send(teachersNoAccount);
-     })
-    // teachersInfo.find({ activeStatus: req.params.activeStatus }, function (err, teacher) {
-    //     if (err) {
-    //         return res.send({ error: err, status: false });
-    //     }
-    //     return res.send({ status: true, data: teacher });
-    // });
+            }
+        });
+        return res.send(teachersNoAccount);
+    })
 });
 
 
- 
