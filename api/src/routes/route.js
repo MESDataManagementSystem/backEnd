@@ -47,7 +47,7 @@ routes.post('/addStudent', studentController.addStudent);
 // routes.get('/findAdviser/:id',teacherSideDashboardController.findAdviser)
 
 // edit form10 excel
-routes.post('/form10', workbookController.editForm10)
+routes.get('/form10', workbookController.editForm10)
 
 
 module.exports = routes;
