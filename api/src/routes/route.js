@@ -6,6 +6,7 @@ var teachersInfoController = require("../controller/teachersInfo-controller");
 var gradeSectionController = require("../controller/gradeSection-controller");
 var studentController = require('../controller/studentInfo-controller');
 var teacherSideDashboardController = require('../controller/teachersideDashboard')
+var workbookController = require('../controller/workBook-controller')
 
 routes.get('/', (req, res) => { return res.send('Welcome Mantalongon Elementary School') }); //for testing only
 
@@ -17,8 +18,8 @@ routes.get('/findAccount/:id', authenticationController.findAccount);
 routes.put('/updateTeacherCredentials:role', authenticationController.updateTeacherCredentials);
 routes.put('/updateCredentials/:role', authenticationController.updateCredentials);
 routes.delete('/removeAccount/:id', authenticationController.removeAccount);
-routes.get('/findTeacher/:id',authenticationController.findTeacher )
-routes.get('/findAdviser',authenticationController.teacherNoAccount )
+routes.get('/findTeacher/:id', authenticationController.findTeacher)
+routes.get('/findAdviser', authenticationController.teacherNoAccount)
 
 routes.post('/addTeachersInfo', teachersInfoController.addTeachersInfo);
 routes.put('/updateTeachersInfo/:id', teachersInfoController.updateTeachersInfo);
@@ -43,6 +44,10 @@ routes.post('/viewFile', studentController.viewFile);
 routes.post('/updateStudent/:id', studentController.updateStudent);
 routes.post('/addStudent', studentController.addStudent);
 // for students (dashboadTeacher)
-routes.get('/findAdviser/:id',teacherSideDashboardController.findAdviser)
+// routes.get('/findAdviser/:id',teacherSideDashboardController.findAdviser)
+
+// edit form10 excel
+routes.post('/form10', workbookController.editForm10)
+
 
 module.exports = routes;
