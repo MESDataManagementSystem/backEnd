@@ -12,6 +12,7 @@ routes.get('/', (req, res) => { return res.send('Welcome Mantalongon Elementary 
 
 routes.post('/register', authenticationController.registerUser);
 routes.post('/login', authenticationController.loginUser);
+routes.post('/loginAdminForConfirmation', authenticationController.loginAdmin);
 routes.get('/getCredentials/:role', authenticationController.getCredentials);
 routes.get('/viewTeacherAccount/:role', authenticationController.viewTeacherAccount);
 routes.get('/findAccount/:id', authenticationController.findAccount);
@@ -21,7 +22,7 @@ routes.delete('/removeAccount/:id', authenticationController.removeAccount);
 routes.get('/findTeacher/:id', authenticationController.findTeacher)
 routes.get('/findAdviser', authenticationController.teacherNoAccount)
 
-routes.post('/addTeachersInfo', teachersInfoController.addTeachersInfo);
+routes.post('/addTeachersInfo', teachersInfoController.addTeachersInfo);    
 routes.put('/updateTeachersInfo/:id', teachersInfoController.updateTeachersInfo);
 routes.get('/viewTeachersInfo/:id', teachersInfoController.viewTeachersInfo);
 routes.get('/viewListOfTeacher/:activeStatus', teachersInfoController.viewListOfTeachers);
@@ -43,6 +44,7 @@ routes.get('/viewListOfOldFiles', studentController.viewListOfOldFiles);
 routes.post('/viewFile', studentController.viewFile);
 routes.post('/updateStudent/:id', studentController.updateStudent);
 routes.post('/addStudent', studentController.addStudent);
+
 // for students (dashboadTeacher)
 // routes.get('/findAdviser/:id',teacherSideDashboardController.findAdviser)
 

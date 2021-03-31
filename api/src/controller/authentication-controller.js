@@ -4,7 +4,8 @@ var config = require('../config/config');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var ObjectId = require('mongodb').ObjectID;
-const { countDocuments } = require('../model/teachersInfo-model');
+var mongoose = require('mongoose');
+const { find } = require('../model/teachersInfo-model');
 
 
 function createToken(user) {
@@ -58,13 +59,35 @@ exports.loginUser = (req, res) => {
                 token: createToken(user),
                 data: user
             });
-            // return res.send({status: true, user})
         } else {
             return res.status(400).json({ msg: 'The username and password don\'t match' });
         }
-
     });
 };
+
+// Login  Admin
+exports.loginAdmin = (req, res) => {
+    User.findOne({ username: req.body.username}, (err, user) => {
+        if (err) {
+            return res.status(400).send({ 'msg': err })
+        }
+        if (!user) {
+            return res.status(400).json({ 'msg': 'Only Admin Have the Access' })
+        }
+        if (user) {
+            if(user.role == 'Admin'){
+                const isMatch = user.comparePassword(user.password, req.body.password);
+                if (isMatch) {
+                    return res.status(200).json({
+                        data: user
+                    });
+                } else {
+                    return res.status(400).json({ msg: 'The username and password don\'t match' });
+                }
+            }
+        }
+    })
+}
 
 // Show The  Credentials
 exports.getCredentials = (req, res) => {
@@ -140,15 +163,17 @@ exports.viewTeacherAccount = (function (req, res) {
 })
 
 // Removing Teacher's Account
-exports.removeAccount = (function (req, res, next) {
-    User.findOneAndRemove(req.params._id, (err, data) => {
+exports.removeAccount = (function (req, res) {
+    User.deleteOne({ _id: req.params.id }, (err) => {
         if (err) {
-            return next(err)
-        } else {
-            res.status(200).json({ msg: data })
+            res.status(500).json({ message: "Something went wrong with the id" })
+        }
+        else {
+            res.status(200).json({ message: "Account Deleted Successfully" })
         }
     })
 })
+
 
 // find specific teacher
 exports.findTeacher = (req, res) => {
@@ -187,7 +212,7 @@ exports.teacherNoAccount = (function (req, res) {
         response.forEach(teacher => {
             if (teacher.Teachers.length == 0 && teacher.activeStatus == 'yes') {
                 console.log('wala')
-                var teacher = { _id: teacher._id, firstName: teacher.firstName, middleName: teacher.middleName, lastName: teacher.lastName, }
+                var teacher = { _id: teacher._id, firstName: teacher.firstName, middleName: teacher.middleName, lastName: teacher.lastName }
                 teachersNoAccount.push(teacher)
             } else {
                 console.log('naa')
@@ -195,4 +220,4 @@ exports.teacherNoAccount = (function (req, res) {
         });
         return res.send(teachersNoAccount);
     })
-}); 
+});
