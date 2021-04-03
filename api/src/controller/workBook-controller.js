@@ -4,6 +4,8 @@ var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
 var studentInfo = require('../model/studentsInfo-model')
 var subjects = require("../model/subjects-model");
+var pdfMaker = require('pdf-maker');
+
 
 exports.editForm10 = (req, res) => {
     // var filePath = 'C:/Users/2ndyrgroupc/Desktop/mantalongon_Project/backEnd/api/new.xlsx';
@@ -794,6 +796,7 @@ exports.editForm10 = (req, res) => {
                             row80.commit()
                             row81.commit()
                             return workbook.xlsx.writeFile('new.xlsx');
+
                         }
                     })
 
@@ -805,4 +808,24 @@ exports.editForm10 = (req, res) => {
     })
     res.send({})
 
-}   
+}
+
+exports.transferFile = (req, res) => {
+    var template = 'http://localhost:5000/api/new';
+    var pdfPath = 'http://localhost:5000/uploads/form11';
+    var option = {
+
+        paperSize: {
+            format: 'A4',
+            orientation: 'portrait',
+            border: '1.8cm'
+
+        }
+    };
+    pdfMaker(template, pdfPath, option);
+    res.send(pdfMaker)
+    // let convertApi = ConvertApi.auth({ secret: '<YOUR SECRET HERE>' })
+    // let params = convertApi.createParams()
+    // params.add('http://localhost:5000/api/new.xlsx', elFileInput.files[0]);
+    // let result = convertApi.convert('xls', 'pdf', params)
+} 

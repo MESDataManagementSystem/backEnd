@@ -1,5 +1,7 @@
 var section = require("../model/gradeSection-model");
 var subjects = require("../model/subjects-model");
+var studentInfo = require('../model/studentsInfo-model')
+
 
 exports.addSection = (req, res) => {
     section.findOne({ sectionName: req.body.sectionName.toLowerCase() }, (err, sections) => {
@@ -59,7 +61,8 @@ exports.updateSection = (req, res) => {
 }
 
 exports.findStudentGrades = (req, res) => {
-    subjects.findOne({ studentId: req.params.id, quarter: req.body.quarter }, (err, grades) => {
+    // console.log(req)
+    subjects.findOne({ studentId: req.params.id, quarter: req.body.quarter, currentGrade: req.body.grade, section: req.body.section }, (err, grades) => {
         if (err) {
             return res.send({ error: err, status: false })
         }
@@ -68,10 +71,10 @@ exports.findStudentGrades = (req, res) => {
 }
 
 exports.findQuarter = (req, res) => {
-    console.log('nisulod dire')
-    id = req.params.id
-    subjects.find({ studentId: req.params.id.trim() }, (err, subjects) => {
-        console.log(subjects);
+    console.log('nisulod dire', req.body)
+    // id = req.body.id
+    subjects.find({ studentId: req.body.id.trim(), currentGrade: req.body.grade, section: req.body.section }, (err, subjects) => {
+        console.log(subjects, 'subjects');
         if (err) {
             res.send({ error: err, status: false })
         }
@@ -108,7 +111,7 @@ exports.updateStudentGrades = (req, res) => {
 }
 
 exports.addStudentGrades = (req, res) => {
-    subjects.findOne({ studentId: req.body.studentId, quarter: req.body.quarter }, (err, grades) => {
+    subjects.findOne({ studentId: req.body.studentId, quarter: req.body.quarter, currentGrade: req.body.grade }, (err, grades) => {
         if (grades) {
             console.log('existing');
             return res.send({ status: false, msg: 'Can only add once!' })
@@ -122,4 +125,53 @@ exports.addStudentGrades = (req, res) => {
             })
         }
     })
+}
+
+exports.proceedNextGrade = (req, res) => {
+    console.log(req.body)
+    subjects.find({ studentId: req.body.id, grade: req.body.grade }, (err, response) => {
+        console.log(response.length, 'length of response')
+        if (err) {
+            return res.send({ status: false, error: err })
+        }
+        if (response.length === 4) {
+            let count = 0;
+            response.forEach(section => {
+                count += 1
+                section.currentGrade = req.body.grade
+                subjects.findByIdAndUpdate({ _id: section._id }, section, (error, updated) => {
+                    if (error) {
+                        return res.send({ status: false, error: error })
+                    }
+
+                })
+            });
+            if (count = 4) {
+                studentInfo.findOne({ _id: req.body.id }, (error, result) => {
+                    if (error) {
+                        res.send({ status: false, result: result })
+                    }
+
+                    if (result) {
+                        result.studentSection = req.body.section
+                        result.studentGrade = req.body.currentGrade
+                        studentInfo.findByIdAndUpdate({ _id: req.body.id, studentGrade: req.body.grade }, result, (err, data) => {
+                            if (err) {
+                                res.send({ status: false, error: err })
+                            }
+                            if (data) {
+                                res.send({ status: true, data: data })
+                            }
+                        })
+                    }
+                })
+                // return res.send({ status: true, data: data })
+            }
+
+        } else {
+            return res.send({ status: false, error: 'Please complete the quarters!' })
+            // console.log('gwapa ko')
+        }
+    })
+
 }

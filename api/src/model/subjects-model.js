@@ -18,8 +18,9 @@ subjects = new mongoose.Schema({
     arabicLanguage: { type: Number, required: false },
     islamicLanguage: { type: Number, required: false },
     quarter: { type: String, required: true },
-    grade: { type: String, required: true },
-    section: { type: String, required: true }
+    grade: { type: String, required: false },
+    section: { type: String, required: false },
+    currentGrade: {type: String, required: false}
 })
 
 module.exports = mongoose.model("Subjects", subjects);

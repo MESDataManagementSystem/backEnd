@@ -50,7 +50,7 @@ exports.addStudent = (function (req, res) {
 exports.viewStudents = (function (req, res) {
     console.log(req.params, 'requests')
 
-    studentInfo.find({ studentSection: req.params.section }, (err, students) => {
+    studentInfo.find({ studentSection: req.params.section, studentGrade: req.params.grade }, (err, students) => {
         if (err) {
             return res.send({ error: err, status: false });
         }
@@ -108,3 +108,6 @@ exports.updateStudent = (req, res) => {
         return res.send({ status: false, msg: 'error' });
     }
 }
+
+
+

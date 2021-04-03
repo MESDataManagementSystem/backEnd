@@ -22,21 +22,21 @@ routes.delete('/removeAccount/:id', authenticationController.removeAccount);
 routes.get('/findTeacher/:id', authenticationController.findTeacher)
 routes.get('/findAdviser', authenticationController.teacherNoAccount)
 
-routes.post('/addTeachersInfo', teachersInfoController.addTeachersInfo);    
+routes.post('/addTeachersInfo', teachersInfoController.addTeachersInfo);
 routes.put('/updateTeachersInfo/:id', teachersInfoController.updateTeachersInfo);
 routes.get('/viewTeachersInfo/:id', teachersInfoController.viewTeachersInfo);
 routes.get('/viewListOfTeacher/:activeStatus', teachersInfoController.viewListOfTeachers);
 
 routes.delete('/deleteSection/:id', gradeSectionController.deleteSection);
 routes.get('/viewSection/:id', gradeSectionController.viewSection);
-routes.get('/findQuarter/:id', gradeSectionController.findQuarter);
+routes.post('/findQuarter', gradeSectionController.findQuarter);
 routes.put('/updateSection/:id', gradeSectionController.updateSection);
 routes.post('/addSection', gradeSectionController.addSection);
 routes.post('/findStudentGrades/:id', gradeSectionController.findStudentGrades);
 routes.post('/updateStudentGrades/:id', gradeSectionController.updateStudentGrades);
 routes.post('/addStudentGrades', gradeSectionController.addStudentGrades);
 
-routes.get('/viewStudents/:section', studentController.viewStudents);
+routes.get('/viewStudents/:section/:grade', studentController.viewStudents);
 routes.get('/generateSection/:section', studentController.createTokenSection);
 routes.get('/findStudent/:id', studentController.findStudent);
 routes.get('/findGrade/:grade', studentController.findGrade);
@@ -50,6 +50,9 @@ routes.post('/addStudent', studentController.addStudent);
 
 // edit form10 excel
 routes.get('/form10', workbookController.editForm10)
+routes.get('/form10pdf', workbookController.transferFile)
+
+routes.post('/nextgrade/', gradeSectionController.proceedNextGrade)
 
 
 module.exports = routes;
