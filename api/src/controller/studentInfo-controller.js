@@ -109,5 +109,31 @@ exports.updateStudent = (req, res) => {
     }
 }
 
+exports.populationStudents = (req, res) => {
+    async function count() {
+        try {
+            var population = []
+            var pop = 0;
+            var grades = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
+            for (let i = 0; i < grades.length; i++) {
+                const count = await studentInfo.countDocuments({ studentGrade: grades[i] });
+                // console.log(`Number of students from Grade 6: ${count}`);
+                population.push(count)
+            }
+
+        } finally {
+            console.log(population, 'population')
+            res.send({ population: population })
+
+        }
+
+    }
+    count().catch(console.dir);
+
+}
+
+
+
+
 
 

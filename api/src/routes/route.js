@@ -44,6 +44,7 @@ routes.get('/viewListOfOldFiles', studentController.viewListOfOldFiles);
 routes.post('/viewFile', studentController.viewFile);
 routes.post('/updateStudent/:id', studentController.updateStudent);
 routes.post('/addStudent', studentController.addStudent);
+routes.get('/populationStudents', studentController.populationStudents);
 
 // for students (dashboadTeacher)
 // routes.get('/findAdviser/:id',teacherSideDashboardController.findAdviser)

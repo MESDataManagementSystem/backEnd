@@ -20,7 +20,7 @@ subjects = new mongoose.Schema({
     quarter: { type: String, required: true },
     grade: { type: String, required: false },
     section: { type: String, required: false },
-    currentGrade: {type: String, required: false}
+    currentGrade: { type: String, required: false }
 })
 
 module.exports = mongoose.model("Subjects", subjects);
