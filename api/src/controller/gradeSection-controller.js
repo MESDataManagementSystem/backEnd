@@ -1,6 +1,7 @@
 var section = require("../model/gradeSection-model");
 var subjects = require("../model/subjects-model");
-var studentInfo = require('../model/studentsInfo-model')
+var studentInfo = require('../model/studentsInfo-model');
+var teachersInfo = require('../model/teachersInfo-model');
 
 
 exports.addSection = (req, res) => {
@@ -173,6 +174,32 @@ exports.proceedNextGrade = (req, res) => {
             // console.log('gwapa ko')
         }
     })
+
+}
+
+exports.populationTeacher = (req, res) => {
+    var listTeachers = []
+    var listUniqueTeachers = []
+    var id = ''
+    let count = 0
+    section.find({}, { adviser: 1, _id: 0 }, (err, teachers) => {
+        teachers.forEach(teacher => {
+            count += 1
+            listTeachers.indexOf(JSON.stringify(teacher.adviser)) >= 0 ? console.log(JSON.stringify(teacher.adviser)) : listTeachers.push(JSON.stringify(teacher.adviser))
+        });
+        if (count === teachers.length) {
+            listUniqueTeachers.push({ advisory: listTeachers.length })
+            teachersInfo.find({ activeStatus: "yes" }, (err, teachers) => {
+                listUniqueTeachers.push({ allTeachers: teachers.length })
+                listUniqueTeachers.push({ nonAdvisory: teachers.length - listTeachers.length })
+                res.send({ data: listUniqueTeachers });
+            
+            })
+        }
+    })
+
+
+
 
 }
 

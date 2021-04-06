@@ -35,6 +35,7 @@ routes.post('/addSection', gradeSectionController.addSection);
 routes.post('/findStudentGrades/:id', gradeSectionController.findStudentGrades);
 routes.post('/updateStudentGrades/:id', gradeSectionController.updateStudentGrades);
 routes.post('/addStudentGrades', gradeSectionController.addStudentGrades);
+routes.get('/teacherPopulation', gradeSectionController.populationTeacher);
 
 routes.get('/viewStudents/:section/:grade', studentController.viewStudents);
 routes.get('/generateSection/:section', studentController.createTokenSection);
