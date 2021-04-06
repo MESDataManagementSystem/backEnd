@@ -15,11 +15,11 @@ routes.post('/loginAdminForConfirmation', authenticationController.loginAdmin);
 routes.get('/getCredentials/:role', authenticationController.getCredentials);
 routes.get('/viewTeacherAccount/:role', authenticationController.viewTeacherAccount);
 routes.get('/findAccount/:id', authenticationController.findAccount);
-routes.put('/updateTeacherCredentials:role', authenticationController.updateTeacherCredentials);
+routes.put('/updateTeacherCredentials/:id', authenticationController.updateTeacherCredentials);
 routes.put('/updateCredentials/:role', authenticationController.updateCredentials);
 routes.delete('/removeAccount/:id', authenticationController.removeAccount);
-routes.get('/findTeacher/:id',authenticationController.findTeacher )
-routes.get('/findAdviser',authenticationController.teacherNoAccount )
+routes.get('/findTeacher/:id',authenticationController.findTeacher );
+routes.get('/findAdviser',authenticationController.teacherNoAccount );
 
 routes.post('/addTeachersInfo', teachersInfoController.addTeachersInfo);    
 routes.put('/updateTeachersInfo/:id', teachersInfoController.updateTeachersInfo);
@@ -45,6 +45,6 @@ routes.post('/updateStudent/:id', studentController.updateStudent);
 routes.post('/addStudent', studentController.addStudent);
 
 // for students (dashboadTeacher)
-routes.get('/findAdviser/:id',teacherSideDashboardController.findAdviser)
+routes.get('/findAdviser/:id',teacherSideDashboardController.findAdviser);
 
 module.exports = routes;

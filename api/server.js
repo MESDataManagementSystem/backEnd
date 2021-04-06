@@ -1,7 +1,6 @@
 var port = process.env.PORT || 5000;
 var config = require('./src/config/config')
 var express = require('express');
-var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var routes = require('./src/routes/route');

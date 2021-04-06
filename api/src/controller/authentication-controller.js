@@ -109,7 +109,7 @@ exports.updateCredentials = (req, res) => {
     bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(credentials.password, salt, function (err, hash) {
             credentials.password = hash
-            User.findOneAndUpdate({ role: req.params.role }, credentials, (err, user) => {
+            User.findOneAndUpdate({ _id: req.params.id }, credentials, (err, user) => {
                 console.log(credentials)
                 if (err) {
                     return res.send({ error: err, status: false })
@@ -120,18 +120,17 @@ exports.updateCredentials = (req, res) => {
     });
 }
 
-// Update Teacher's Account
+// Update Teacher's Account     
 exports.updateTeacherCredentials = (req, res) => {
     var credentials = {
         username: req.body.username,
         password: req.body.password,
-        adviser: req.body.adviser
     }
     const saltRounds = 10;
     bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(credentials.password, salt, function (err, hash) {
             credentials.password = hash
-            User.findOneAndUpdate({ role: req.params.role }, credentials, (err, user) => {
+            User.findOneAndUpdate({ _id: req.params.id }, credentials, (err, user) => {
                 console.log(credentials)
                 if (err) {
                     return res.send({ error: err, status: false })
@@ -174,7 +173,6 @@ exports.removeAccount = (function (req, res) {
     })
 })
 
-
 // find specific teacher
 exports.findTeacher = (req, res) => {
     teachersInfo.aggregate([
@@ -192,7 +190,7 @@ exports.findTeacher = (req, res) => {
     })
 }
 
-// view no advisory teachers
+// view no advisory teachers 
 exports.teacherNoAccount = (function (req, res) {
     var teachersNoAccount = []
     teachersInfo.aggregate([
@@ -205,7 +203,8 @@ exports.teacherNoAccount = (function (req, res) {
                 as: "Teachers"
             }
         }
-    ], (err, response) => {
+    ], 
+    (err, response) => {
         if (err) {
             return res.send(err)
         }
