@@ -25,8 +25,9 @@ exports.addSection = (req, res) => {
 }
 
 exports.viewSection = (req, res) => {
-    console.log(req.params.id)
-    section.find({ gradeLevel: req.params.id })
+    var sectionsNumber = []
+    // console.log(req.params.grade)
+    section.find({ gradeLevel: req.params.grade })
         .populate({
             path: 'adviser',
             model: 'TeacherInfo',
@@ -36,7 +37,28 @@ exports.viewSection = (req, res) => {
             if (err) {
                 return res.send({ error: err, status: false });
             }
-            return res.send({ status: true, data: section })
+            if (section) {
+                var count = 0;
+                // console.log(section)
+                section.forEach(element => {
+
+                    studentInfo.find({ studentGrade: req.params.grade, studentSection: element.sectionName }, { _id: 1 }, (err, response) => {
+                        sectionsNumber.push({ section: element.sectionName, population: response.length })
+                        console.log(sectionsNumber)
+                        count += 1
+                        console.log(count, section.length)
+                        if (count === section.length) {
+                            console.log(sectionsNumber)
+                            return res.send({ status: true, data: section, population: sectionsNumber })
+                        }
+                    });
+
+
+                });
+
+
+            }
+
         })
 }
 
@@ -146,7 +168,6 @@ exports.proceedNextGrade = (req, res) => {
                     if (error) {
                         return res.send({ status: false, error: error })
                     }
-
                 })
             });
             if (count = 4) {
@@ -154,7 +175,6 @@ exports.proceedNextGrade = (req, res) => {
                     if (error) {
                         res.send({ status: false, result: result })
                     }
-
                     if (result) {
                         result.studentSection = req.body.section
                         result.studentGrade = req.body.currentGrade
@@ -205,7 +225,6 @@ exports.populationTeacher = (req, res) => {
                         } else {
                             listTeachers.push(JSON.stringify(teacher.adviser))
                             listAdvisoryData.push(teacher.adviser)
-
                         }
                     });
                     if (count === teachers.length) {
@@ -225,21 +244,23 @@ exports.populationTeacher = (req, res) => {
                                                 listUniqueTeachers.push({ nonAdvisory: teachers.length - listTeachers.length })
                                                 var count = 0;
                                                 teachers.forEach(id => {
-                                                    count += 1;
+
                                                     if (listTeachers.indexOf(JSON.stringify(id._id)) >= 0) {
                                                     } else {
                                                         listNonAdvisory.push((id._id))
                                                     }
+                                                    count += 1;
                                                 });
                                                 if (count === teachers.length) {
                                                     count1 = 1;
                                                     listNonAdvisory.forEach(elements => {
                                                         teachersInfo.findOne({ _id: elements }, { "_id": 0, lastName: 1, firstName: 1, middleName: 1, nameExt: 1, employeeNumber: 1 }, (err, ress) => {
                                                             listNonAdvisoryData.push(ress);
-                                                            count1 += 1;
+                                                            console.log(ress, 'non advisory')
                                                             if (count1 == listNonAdvisory.length) {
                                                                 res.send({ data: listUniqueTeachers, advisory: teacherAdvisory, nonAdvisory: listNonAdvisoryData, schoolYear: data.year });
                                                             }
+                                                            count1 += 1;
                                                         })
                                                     });
 
@@ -250,13 +271,7 @@ exports.populationTeacher = (req, res) => {
                                     })
                                 }
                             })
-
-
-
-
-                            // console.log(countAdviser, listAdvisoryData.length)
                         });
-
                     }
                 })
             }
