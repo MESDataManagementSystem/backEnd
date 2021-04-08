@@ -2,6 +2,8 @@ var section = require("../model/gradeSection-model");
 var subjects = require("../model/subjects-model");
 var studentInfo = require('../model/studentsInfo-model');
 var teachersInfo = require('../model/teachersInfo-model');
+var ObjectId = require('mongodb').ObjectID;
+
 
 
 exports.addSection = (req, res) => {
@@ -178,28 +180,87 @@ exports.proceedNextGrade = (req, res) => {
 }
 
 exports.populationTeacher = (req, res) => {
+    const todaysDate = new Date()
+    const currentYear = todaysDate.getFullYear()
     var listTeachers = []
+    var listNonAdvisory = []
+    var listNonAdvisoryData = []
+    var listAdvisoryData = [];
     var listUniqueTeachers = []
     var id = ''
     let count = 0
-    section.find({}, { adviser: 1, _id: 0 }, (err, teachers) => {
-        teachers.forEach(teacher => {
-            count += 1
-            listTeachers.indexOf(JSON.stringify(teacher.adviser)) >= 0 ? console.log(JSON.stringify(teacher.adviser)) : listTeachers.push(JSON.stringify(teacher.adviser))
+    let teacherAdvisory = []
+    // wla pani nabutngan ug currentYear
+    // section.find().sort({_id:1});
+    section.findOne(
+        {}, { year: 1, _id: 0 },
+        { sort: { _id: -1 } },
+        (err, data) => {
+            console.log(data, 'current');
+            if (data) {
+                section.find({ year: data.year }, { _id: 0 }, (err, teachers) => {
+                    teachers.forEach(teacher => {
+                        count += 1
+                        if (listTeachers.indexOf(JSON.stringify(teacher.adviser)) >= 0) {
+                        } else {
+                            listTeachers.push(JSON.stringify(teacher.adviser))
+                            listAdvisoryData.push(teacher.adviser)
+
+                        }
+                    });
+                    if (count === teachers.length) {
+
+                        listUniqueTeachers.push({ advisory: listTeachers.length })
+                        let countAdviser = 0;
+                        listAdvisoryData.forEach(element => {
+                            teachersInfo.findOne({ _id: element }, { _id: 0, lastName: 1, firstName: 1, middleName: 1, nameExt: 1, employeeNumber: 1 }, (err, teacher1) => {
+                                if (err) {
+                                } else {
+                                    section.find({ adviser: element }, { _id: 0, gradeLevel: 1, sectionName: 1 }, (err, result) => {
+                                        teacherAdvisory.push({ adviserName: teacher1, sections: result })
+                                        countAdviser += 1;
+                                        if (countAdviser === listAdvisoryData.length) {
+                                            teachersInfo.find({ activeStatus: "yes" }, { "_id": 1 }, (err, teachers) => {
+                                                listUniqueTeachers.push({ allTeachers: teachers.length })
+                                                listUniqueTeachers.push({ nonAdvisory: teachers.length - listTeachers.length })
+                                                var count = 0;
+                                                teachers.forEach(id => {
+                                                    count += 1;
+                                                    if (listTeachers.indexOf(JSON.stringify(id._id)) >= 0) {
+                                                    } else {
+                                                        listNonAdvisory.push((id._id))
+                                                    }
+                                                });
+                                                if (count === teachers.length) {
+                                                    count1 = 1;
+                                                    listNonAdvisory.forEach(elements => {
+                                                        teachersInfo.findOne({ _id: elements }, { "_id": 0, lastName: 1, firstName: 1, middleName: 1, nameExt: 1, employeeNumber: 1 }, (err, ress) => {
+                                                            listNonAdvisoryData.push(ress);
+                                                            count1 += 1;
+                                                            if (count1 == listNonAdvisory.length) {
+                                                                res.send({ data: listUniqueTeachers, advisory: teacherAdvisory, nonAdvisory: listNonAdvisoryData, schoolYear: data.year });
+                                                            }
+                                                        })
+                                                    });
+
+                                                }
+
+                                            })
+                                        }
+                                    })
+                                }
+                            })
+
+
+
+
+                            // console.log(countAdviser, listAdvisoryData.length)
+                        });
+
+                    }
+                })
+            }
         });
-        if (count === teachers.length) {
-            listUniqueTeachers.push({ advisory: listTeachers.length })
-            teachersInfo.find({ activeStatus: "yes" }, (err, teachers) => {
-                listUniqueTeachers.push({ allTeachers: teachers.length })
-                listUniqueTeachers.push({ nonAdvisory: teachers.length - listTeachers.length })
-                res.send({ data: listUniqueTeachers });
-            
-            })
-        }
-    })
-
-
-
 
 }
 

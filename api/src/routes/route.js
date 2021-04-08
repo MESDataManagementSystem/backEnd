@@ -16,7 +16,7 @@ routes.post('/loginAdminForConfirmation', authenticationController.loginAdmin);
 routes.get('/getCredentials/:role', authenticationController.getCredentials);
 routes.get('/viewTeacherAccount/:role', authenticationController.viewTeacherAccount);
 routes.get('/findAccount/:id', authenticationController.findAccount);
-routes.put('/updateTeacherCredentials:role', authenticationController.updateTeacherCredentials);
+routes.put('/updateTeacherCredentials/:id', authenticationController.updateTeacherCredentials);
 routes.put('/updateCredentials/:role', authenticationController.updateCredentials);
 routes.delete('/removeAccount/:id', authenticationController.removeAccount);
 routes.get('/findTeacher/:id', authenticationController.findTeacher)
@@ -56,5 +56,6 @@ routes.get('/form10pdf', workbookController.transferFile)
 
 routes.post('/nextgrade/', gradeSectionController.proceedNextGrade)
 
+routes.get('/findAdviser/:id',teacherSideDashboardController.findAdviser);
 
 module.exports = routes;
