@@ -50,7 +50,6 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 app.post('/uploadSingleFile', upload.single('files'), (req, res, next) => {
-    // var data = { fullname: req.body.name, lrn: req.body.lrn, fileUrl: req.file.filename };
     req.body.fileUrl = req.body.fileUrl + req.file.filename
     oldFile.findOne({ lrn: req.body.lrn }, (err, user) => {
         if (err) {
@@ -70,6 +69,21 @@ app.post('/uploadSingleFile', upload.single('files'), (req, res, next) => {
         })
     })
 });
+
+app.put('/editGraduatedStudent', (req, res) =>{
+    var data = {
+        fullName: req.body.fullName,
+        lrn: req.body.lrn,
+        fileUrl: req.body.fileUrl,
+        date: req.body.date
+    }
+    oldFile.findByIdAndUpdate({ _id: req.body._id }, data,(err, file)=>{
+        if (err) {
+            return res.send({ error: err, status: false });
+        }
+        return res.send({ status: true, data: file });
+    })
+})
 
 // Connect to the Database
 mongoose.connect(config.onlineDb, {
