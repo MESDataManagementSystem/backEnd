@@ -797,12 +797,26 @@ exports.editForm10 = (req, res) => {
                             row81.commit()
                             return workbook.xlsx.writeFile('new.xlsx');
 
+
                         }
                     })
 
                 })
 
+                // File destination.txt will be created or overwritten by default.
+                // let file = 'new.'
+                // file = file.substr(0, file.lastIndexOf(".")) + ".htm";
+                fs.copyFile('new.xlsx', 'newq.pdf', (err) => {
+                if (err) throw err;
+                console.log('source.txt was copied to destination.txt');
+                });
+
         } else {
+            fs.copyFile('new.xlsx', 'newq.pdf', (err) => {
+                if (err) throw err;
+                console.log('source.txt was copied to destination.txt');
+                });
+
             console.log(err, 'error');
         }
     })

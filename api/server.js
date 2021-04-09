@@ -70,20 +70,35 @@ app.post('/uploadSingleFile', upload.single('files'), (req, res, next) => {
     })
 });
 
-app.put('/editGraduatedStudent', (req, res) =>{
+// without file in update
+app.post('/editGraduatedStudent', (req, res) =>{
     var data = {
         fullName: req.body.fullName,
         lrn: req.body.lrn,
         fileUrl: req.body.fileUrl,
         date: req.body.date
     }
-    oldFile.findByIdAndUpdate({ _id: req.body._id }, data,(err, file)=>{
+    oldFile.findByIdAndUpdate({ _id: req.body.id }, data,(err, file)=>{
         if (err) {
             return res.send({ error: err, status: false });
         }
         return res.send({ status: true, data: file });
     })
 })
+
+// with file in update
+app.post('/uploadSingleFileUpdate', upload.single('files'), (req, res, next) => {
+    req.body.fileUrl = req.body.fileUrl + req.file.filename
+    oldFile.findByIdAndUpdate({ _id: req.body.id }, req.body,(err, file)=>{
+        if (err) {
+            return res.send({ error: err, status: false });
+        }
+        return res.send({ status: true, data: file });
+    })
+
+});
+
+
 
 // Connect to the Database
 mongoose.connect(config.onlineDb, {
