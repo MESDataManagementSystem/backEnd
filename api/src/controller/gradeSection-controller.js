@@ -1,6 +1,15 @@
 var section = require("../model/gradeSection-model");
 var subjects = require("../model/subjects-model");
 
+exports.findAdviser = (req, res) => {
+    section.find({ adviser: req.body.adviser }, (err, teacher) => {
+        if (err) {
+            return res.send({error: err, status: false})
+        }
+        return res.send({status: false, data, teacher})
+    })
+}
+
 exports.addSection = (req, res) => {
     section.findOne({ sectionName: req.body.sectionName.toLowerCase() }, (err, sections) => {
         if (err) {
