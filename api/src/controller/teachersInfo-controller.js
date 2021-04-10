@@ -1,5 +1,6 @@
 var teachersInfo = require('../model/teachersInfo-model');
-
+var section = require("../model/gradeSection-model");
+var ObjectId = require('mongodb').ObjectID;
 // Adding Teacher's Info
 exports.addTeachersInfo = (req, res) => {
     console.log(req.body)
@@ -81,3 +82,22 @@ exports.updateTeachersInfo = (req, res) => {
         return res.send({ status: true, data: teacher });
     })
 }
+
+
+exports.findAdviser = (req, res) => {
+    section.find({ adviser: ObjectId(req.params.id) }, { _id: 0, gradeLevel: 1, sectionName:1 }, (err, adviser) => {
+        console.log(req.params.id ,"adviser", adviser,"id")
+        if (err) {
+            return res.send({ error: err, status: false })
+        }
+        if(adviser){
+            if(adviser.length === 0){
+                res.send({status: true})
+            }else{
+                res.send({status: false, data: adviser})
+            }
+        }
+        // return res.send({ status: true, data: adviser })
+    })
+}
+

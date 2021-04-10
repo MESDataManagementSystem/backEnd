@@ -25,6 +25,7 @@ routes.post('/addTeachersInfo', teachersInfoController.addTeachersInfo);
 routes.put('/updateTeachersInfo/:id', teachersInfoController.updateTeachersInfo);
 routes.get('/viewTeachersInfo/:id', teachersInfoController.viewTeachersInfo);
 routes.get('/viewListOfTeacher/:activeStatus', teachersInfoController.viewListOfTeachers);
+routes.get('/findAdviser/:id', teachersInfoController.findAdviser);
 
 routes.delete('/deleteSection/:id', gradeSectionController.deleteSection);
 routes.get('/viewSection/:id', gradeSectionController.viewSection);
