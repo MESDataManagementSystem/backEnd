@@ -12,8 +12,9 @@ exports.editForm10 = (req, res) => {
     // fs.unlinkSync(filePath);
     // console.log('deleted');
     var count = 0;
-    studentInfo.findOne({ _id: '605c3a7f074dea2aa45f3a82' }, (err, response) => {
+    studentInfo.findOne({ _id: req.params.id }, (err, response) => {
         if (response) {
+            console.log('naa gd')
             workbook.xlsx.readFile(__dirname + '//' + "form10.xlsx")
                 .then(function () {
                     var worksheetFront = workbook.getWorksheet("Front");
@@ -99,11 +100,21 @@ exports.editForm10 = (req, res) => {
                     var row75 = worksheetBack.getRow(4);
                     var row76 = worksheetBack.getRow(5);
                     var row77 = worksheetBack.getRow(6);
-                    // grade g
+                    // grade 6
                     var row78 = worksheetBack.getRow(32);
                     var row79 = worksheetBack.getRow(33);
                     var row80 = worksheetBack.getRow(34);
                     var row81 = worksheetBack.getRow(35);
+                    // for average 
+                    var row82 = worksheetFront.getRow(45);
+                    var row83 = worksheetFront.getRow(75);
+                    var row84 = worksheetBack.getRow(25);
+                    var row85 = worksheetBack.getRow(54);
+                    // for MAPEH
+                    var row86 = worksheetFront.getRow(37);
+                    var row87 = worksheetFront.getRow(67);
+                    var row88 = worksheetBack.getRow(17);
+                    var row89 = worksheetBack.getRow(46);
 
 
                     row1.getCell(5).value = response.studentLastName; // lastname
@@ -121,25 +132,17 @@ exports.editForm10 = (req, res) => {
                     row4.getCell(43).value = response.studentOthers; //(T-19)) (Z-26) Others
                     row5.getCell(12).value = response.studentNameAdressOfTestingCenter; //(T-19)) (Z-26) Name and Address of Testing Center:
                     row5.getCell(36).value = response.studentRemark; //(T-19)) (Z-26) Remark
-                    row6.getCell(4).value = "Mantalongon Elementary School"; //(T-19)) (Z-26) Remark
-                    row6.getCell(19).value = "204512"; //(T-19)) (Z-26) Remark
-                    row7.getCell(4).value = "1 "; //(T-19)) (Z-26) Remark
-                    row7.getCell(9).value = "Cebu"; //(T-19)) (Z-26) Remark
-                    row7.getCell(20).value = "7 "; //(T-19)) (Z-26) Remark
-                    row8.getCell(6).value = "1 "; //(T-19)) (Z-26) Remark
-                    row8.getCell(10).value = response.studentSection; //(T-19)) (Z-26) Remark
-                    row8.getCell(19).value = "2021-2022"; //(T-19)) (Z-26) Remark
-                    row9.getCell(8).value = "Yubert Mariscal"; //(T-19)) (Z-26) Remark
-                    subjects.find({ studentId: '605c3a7f074dea2aa45f3a82' }, (err, result) => {
+                    subjects.find({ studentId: req.params.id }, (err, result) => {
                         result.forEach(grade => {
                             count += 1
+                            console.log(grade);
                             if (grade.grade === 'Kindergarten') {
                                 row6.getCell(4).value = "Mantalongon Elementary School"; //(T-19)) (Z-26) Remark
                                 row6.getCell(19).value = "204512"; //(T-19)) (Z-26) Remark
                                 row7.getCell(4).value = "1 "; //(T-19)) (Z-26) Remark
                                 row7.getCell(9).value = "Cebu"; //(T-19)) (Z-26) Remark
                                 row7.getCell(20).value = "7 "; //(T-19)) (Z-26) Remark
-                                row8.getCell(6).value = "1 "; //(T-19)) (Z-26) Remark
+                                row8.getCell(6).value = "Kindergarten"; //(T-19)) (Z-26) Remark
                                 row8.getCell(10).value = response.studentSection; //(T-19)) (Z-26) Remark
                                 row8.getCell(19).value = "2021-2022"; //(T-19)) (Z-26) Remark
                                 row9.getCell(8).value = "Yubert Mariscal"; //(T-19)) (Z-26) Remark
@@ -159,6 +162,8 @@ exports.editForm10 = (req, res) => {
                                     row22.getCell(11).value = grade.edukasyonSaPagpapakatao;
                                     row23.getCell(11).value = grade.arabicLanguage;
                                     row24.getCell(11).value = grade.islamicLanguage;
+                                    row82.getCell(11).value = grade.average;
+                                    row86.getCell(11).value = grade.mapeh;
                                 }
                                 if (grade.quarter === 'Quarter 2') {
                                     row10.getCell(12).value = grade.motherTongue;
@@ -176,6 +181,8 @@ exports.editForm10 = (req, res) => {
                                     row22.getCell(12).value = grade.edukasyonSaPagpapakatao;
                                     row23.getCell(12).value = grade.arabicLanguage;
                                     row24.getCell(12).value = grade.islamicLanguage;
+                                    row82.getCell(12).value = grade.average;
+                                    row86.getCell(12).value = grade.mapeh;
                                 }
                                 if (grade.quarter === 'Quarter 3') {
                                     row10.getCell(14).value = grade.motherTongue;
@@ -193,6 +200,8 @@ exports.editForm10 = (req, res) => {
                                     row22.getCell(14).value = grade.edukasyonSaPagpapakatao;
                                     row23.getCell(14).value = grade.arabicLanguage;
                                     row24.getCell(14).value = grade.islamicLanguage;
+                                    row82.getCell(14).value = grade.average;
+                                    row86.getCell(14).value = grade.mapeh;
                                 }
                                 if (grade.quarter === 'Quarter 4') {
                                     row10.getCell(15).value = grade.motherTongue;
@@ -210,6 +219,8 @@ exports.editForm10 = (req, res) => {
                                     row22.getCell(15).value = grade.edukasyonSaPagpapakatao;
                                     row23.getCell(15).value = grade.arabicLanguage;
                                     row24.getCell(15).value = grade.islamicLanguage;
+                                    row82.getCell(15).value = grade.average;
+                                    row86.getCell(15).value = grade.mapeh;
                                 }
 
                             }
@@ -239,7 +250,8 @@ exports.editForm10 = (req, res) => {
                                     row22.getCell(36).value = grade.edukasyonSaPagpapakatao;
                                     row23.getCell(36).value = grade.arabicLanguage;
                                     row24.getCell(36).value = grade.islamicLanguage;
-
+                                    row82.getCell(36).value = grade.average;
+                                    row86.getCell(36).value = grade.mapeh;
                                 }
                                 if (grade.quarter === 'Quarter 2') {
                                     row10.getCell(39).value = grade.motherTongue;
@@ -257,7 +269,8 @@ exports.editForm10 = (req, res) => {
                                     row22.getCell(39).value = grade.edukasyonSaPagpapakatao;
                                     row23.getCell(39).value = grade.arabicLanguage;
                                     row24.getCell(39).value = grade.islamicLanguage;
-
+                                    row82.getCell(39).value = grade.average;
+                                    row86.getCell(39).value = grade.mapeh;
                                 }
                                 if (grade.quarter === 'Quarter 3') {
                                     row10.getCell(41).value = grade.motherTongue;
@@ -275,7 +288,8 @@ exports.editForm10 = (req, res) => {
                                     row22.getCell(41).value = grade.edukasyonSaPagpapakatao;
                                     row23.getCell(41).value = grade.arabicLanguage;
                                     row24.getCell(41).value = grade.islamicLanguage;
-
+                                    row82.getCell(41).value = grade.average;
+                                    row86.getCell(41).value = grade.mapeh;
                                 }
                                 if (grade.quarter === 'Quarter 4') {
                                     row10.getCell(44).value = grade.motherTongue;
@@ -293,7 +307,8 @@ exports.editForm10 = (req, res) => {
                                     row22.getCell(44).value = grade.edukasyonSaPagpapakatao;
                                     row23.getCell(44).value = grade.arabicLanguage;
                                     row24.getCell(44).value = grade.islamicLanguage;
-
+                                    row82.getCell(44).value = grade.average;
+                                    row86.getCell(44).value = grade.mapeh;
                                 }
                             }
                             if (grade.grade === 'Grade 2') {
@@ -302,7 +317,7 @@ exports.editForm10 = (req, res) => {
                                 row71.getCell(4).value = "1 "; //(T-19)) (Z-26) Remark
                                 row71.getCell(9).value = "Cebu"; //(T-19)) (Z-26) Remark
                                 row71.getCell(20).value = "7 "; //(T-19)) (Z-26) Remark
-                                row72.getCell(6).value = "1 "; //(T-19)) (Z-26) Remark
+                                row72.getCell(6).value = "2 "; //(T-19)) (Z-26) Remark
                                 row72.getCell(10).value = response.studentSection; //(T-19)) (Z-26) Remark
                                 row72.getCell(19).value = "2021-2022"; //(T-19)) (Z-26) Remark
                                 row73.getCell(8).value = "Yubert Mariscal"; //(T-19)) (Z-26) Remark
@@ -322,6 +337,8 @@ exports.editForm10 = (req, res) => {
                                     row37.getCell(11).value = grade.edukasyonSaPagpapakatao;
                                     row38.getCell(11).value = grade.arabicLanguage;
                                     row39.getCell(11).value = grade.islamicLanguage;
+                                    row83.getCell(11).value = grade.average;
+                                    row87.getCell(11).value = grade.mapeh;
 
                                 }
                                 if (grade.quarter === 'Quarter 2') {
@@ -340,6 +357,8 @@ exports.editForm10 = (req, res) => {
                                     row37.getCell(12).value = grade.edukasyonSaPagpapakatao;
                                     row38.getCell(12).value = grade.arabicLanguage;
                                     row39.getCell(12).value = grade.islamicLanguage;
+                                    row83.getCell(12).value = grade.average;
+                                    row87.getCell(12).value = grade.mapeh;
 
 
                                 }
@@ -359,7 +378,8 @@ exports.editForm10 = (req, res) => {
                                     row37.getCell(14).value = grade.edukasyonSaPagpapakatao;
                                     row38.getCell(14).value = grade.arabicLanguage;
                                     row39.getCell(14).value = grade.islamicLanguage;
-
+                                    row83.getCell(14).value = grade.average;
+                                    row87.getCell(14).value = grade.mapeh;
                                 }
                                 if (grade.quarter === 'Quarter 4') {
                                     row25.getCell(15).value = grade.motherTongue;
@@ -377,7 +397,8 @@ exports.editForm10 = (req, res) => {
                                     row37.getCell(15).value = grade.edukasyonSaPagpapakatao;
                                     row38.getCell(15).value = grade.arabicLanguage;
                                     row39.getCell(15).value = grade.islamicLanguage;
-
+                                    row83.getCell(15).value = grade.average;
+                                    row87.getCell(15).value = grade.mapeh;
                                 }
                             }
                             if (grade.grade === 'Grade 3') {
@@ -386,7 +407,7 @@ exports.editForm10 = (req, res) => {
                                 row71.getCell(30).value = "1 "; //(T-19)) (Z-26) Remark
                                 row71.getCell(30).value = "Cebu"; //(T-19)) (Z-26) Remark
                                 row71.getCell(51).value = "7 "; //(T-19)) (Z-26) Remark
-                                row72.getCell(26).value = "1 "; //(T-19)) (Z-26) Remark
+                                row72.getCell(26).value = "3 "; //(T-19)) (Z-26) Remark
                                 row72.getCell(31).value = response.studentSection; //(T-19)) (Z-26) Remark
                                 row72.getCell(48).value = "2021-2022"; //(T-19)) (Z-26) Remark
                                 row73.getCell(29).value = "Yubert Mariscal"; //(T-19)) (Z-26) Remark
@@ -406,7 +427,7 @@ exports.editForm10 = (req, res) => {
                                     row37.getCell(36).value = grade.edukasyonSaPagpapakatao;
                                     row38.getCell(36).value = grade.arabicLanguage;
                                     row39.getCell(36).value = grade.islamicLanguage;
-
+                                    row87.getCell(36).value = grade.mapeh;
                                 }
                                 if (grade.quarter === 'Quarter 2') {
                                     row25.getCell(39).value = grade.motherTongue;
@@ -424,6 +445,9 @@ exports.editForm10 = (req, res) => {
                                     row37.getCell(39).value = grade.edukasyonSaPagpapakatao;
                                     row38.getCell(39).value = grade.arabicLanguage;
                                     row39.getCell(39).value = grade.islamicLanguage;
+                                    row83.getCell(39).value = grade.average;
+                                    row87.getCell(39).value = grade.mapeh;
+
 
                                 }
                                 if (grade.quarter === 'Quarter 3') {
@@ -442,7 +466,8 @@ exports.editForm10 = (req, res) => {
                                     row37.getCell(41).value = grade.edukasyonSaPagpapakatao;
                                     row38.getCell(41).value = grade.arabicLanguage;
                                     row39.getCell(41).value = grade.islamicLanguage;
-
+                                    row83.getCell(41).value = grade.average;
+                                    row87.getCell(41).value = grade.mapeh;
                                 }
                                 if (grade.quarter === 'Quarter 4') {
                                     row25.getCell(44).value = grade.motherTongue;
@@ -460,6 +485,8 @@ exports.editForm10 = (req, res) => {
                                     row37.getCell(44).value = grade.edukasyonSaPagpapakatao;
                                     row38.getCell(44).value = grade.arabicLanguage;
                                     row39.getCell(44).value = grade.islamicLanguage;
+                                    row83.getCell(44).value = grade.average;
+                                    row87.getCell(44).value = grade.mapeh;
                                 }
                             }
                             if (grade.grade === 'Grade 4') {
@@ -468,7 +495,7 @@ exports.editForm10 = (req, res) => {
                                 row75.getCell(4).value = "1"; //(T-19)) (Z-26) Remark
                                 row75.getCell(8).value = "Cebu"; //(T-19)) (Z-26) Remark
                                 row75.getCell(16).value = "7 "; //(T-19)) (Z-26) Remark
-                                row76.getCell(5).value = "1 "; //(T-19)) (Z-26) Remark
+                                row76.getCell(5).value = "4"; //(T-19)) (Z-26) Remark
                                 row76.getCell(7).value = response.studentSection; //(T-19)) (Z-26) Remark
                                 row76.getCell(15).value = "2021-2022"; //(T-19)) (Z-26) Remark
                                 row77.getCell(6).value = "Yubert Mariscal"; //(T-19)) (Z-26) Remark
@@ -489,6 +516,9 @@ exports.editForm10 = (req, res) => {
                                         row52.getCell(8).value = grade.edukasyonSaPagpapakatao;
                                         row53.getCell(8).value = grade.arabicLanguage;
                                         row54.getCell(8).value = grade.islamicLanguage;
+                                        row54.getCell(8).value = grade.islamicLanguage;
+                                        row84.getCell(8).value = grade.average;
+                                        row88.getCell(8).value = grade.mapeh;
 
                                     }
                                     if (grade.quarter === 'Quarter 2') {
@@ -507,6 +537,8 @@ exports.editForm10 = (req, res) => {
                                         row52.getCell(9).value = grade.edukasyonSaPagpapakatao;
                                         row53.getCell(9).value = grade.arabicLanguage;
                                         row54.getCell(9).value = grade.islamicLanguage;
+                                        row84.getCell(9).value = grade.average;
+                                        row88.getCell(9).value = grade.mapeh;
 
                                     }
                                     if (grade.quarter === 'Quarter 3') {
@@ -525,6 +557,8 @@ exports.editForm10 = (req, res) => {
                                         row52.getCell(10).value = grade.edukasyonSaPagpapakatao;
                                         row53.getCell(10).value = grade.arabicLanguage;
                                         row54.getCell(10).value = grade.islamicLanguage;
+                                        row84.getCell(10).value = grade.average;
+                                        row88.getCell(10).value = grade.mapeh;
 
                                     }
                                     if (grade.quarter === 'Quarter 4') {
@@ -543,6 +577,8 @@ exports.editForm10 = (req, res) => {
                                         row52.getCell(11).value = grade.edukasyonSaPagpapakatao;
                                         row53.getCell(11).value = grade.arabicLanguage;
                                         row54.getCell(11).value = grade.islamicLanguage;
+                                        row84.getCell(11).value = grade.average;
+                                        row88.getCell(11).value = grade.mapeh;
                                     }
                                 }
                             }
@@ -552,7 +588,7 @@ exports.editForm10 = (req, res) => {
                                 row75.getCell(20).value = "1"; //(T-19)) (Z-26) Remark
                                 row75.getCell(28).value = "Cebu"; //(T-19)) (Z-26) Remark
                                 row75.getCell(34).value = "7 "; //(T-19)) (Z-26) Remark
-                                row76.getCell(21).value = "1 "; //(T-19)) (Z-26) Remark
+                                row76.getCell(21).value = "5"; //(T-19)) (Z-26) Remark
                                 row76.getCell(26).value = response.studentSection; //(T-19)) (Z-26) Remark
                                 row76.getCell(33).value = "2021-2022"; //(T-19)) (Z-26) Remark
                                 row77.getCell(22).value = "Yubert Mariscal"; //(T-19)) (Z-26) Remark
@@ -572,7 +608,8 @@ exports.editForm10 = (req, res) => {
                                     row52.getCell(28).value = grade.edukasyonSaPagpapakatao;
                                     row53.getCell(28).value = grade.arabicLanguage;
                                     row54.getCell(28).value = grade.islamicLanguage;
-
+                                    row84.getCell(28).value = grade.average;
+                                    row88.getCell(28).value = grade.mapeh;
                                 }
                                 if (grade.quarter === 'Quarter 2') {
                                     row40.getCell(30).value = grade.motherTongue;
@@ -590,6 +627,8 @@ exports.editForm10 = (req, res) => {
                                     row52.getCell(30).value = grade.edukasyonSaPagpapakatao;
                                     row53.getCell(30).value = grade.arabicLanguage;
                                     row54.getCell(30).value = grade.islamicLanguage;
+                                    row84.getCell(30).value = grade.average;
+                                    row88.getCell(30).value = grade.mapeh;
 
                                 }
                                 if (grade.quarter === 'Quarter 3') {
@@ -608,6 +647,8 @@ exports.editForm10 = (req, res) => {
                                     row52.getCell(32).value = grade.edukasyonSaPagpapakatao;
                                     row53.getCell(32).value = grade.arabicLanguage;
                                     row54.getCell(32).value = grade.islamicLanguage;
+                                    row84.getCell(32).value = grade.average;
+                                    row88.getCell(32).value = grade.mapeh;
 
                                 }
                                 if (grade.quarter === 'Quarter 4') {
@@ -626,19 +667,23 @@ exports.editForm10 = (req, res) => {
                                     row52.getCell(33).value = grade.edukasyonSaPagpapakatao;
                                     row53.getCell(33).value = grade.arabicLanguage;
                                     row54.getCell(33).value = grade.islamicLanguage;
+                                    row84.getCell(33).value = grade.average;
+                                    row88.getCell(33).value = grade.mapeh;
                                 }
                             }
                             if (grade.grade === 'Grade 6') {
+                                let countGrade = 0;
                                 row78.getCell(4).value = "Mantalongon Elementary School"; //(T-19)) (Z-26) Remark
                                 row78.getCell(15).value = "204512"; //(T-19)) (Z-26) Remark
                                 row79.getCell(4).value = "1"; //(T-19)) (Z-26) Remark
                                 row79.getCell(8).value = "Cebu"; //(T-19)) (Z-26) Remark
                                 row79.getCell(16).value = "7 "; //(T-19)) (Z-26) Remark
-                                row80.getCell(5).value = "1 "; //(T-19)) (Z-26) Remark
+                                row80.getCell(5).value = "6"; //(T-19)) (Z-26) Remark
                                 row80.getCell(7).value = response.studentSection; //(T-19)) (Z-26) Remark
                                 row80.getCell(15).value = "2021-2022"; //(T-19)) (Z-26) Remark
                                 row81.getCell(6).value = "Yubert Mariscal"; //(T-19)) (Z-26) Remark
                                 if (grade.quarter === 'Quarter 1') {
+                                    countGrade++;
                                     row55.getCell(8).value = grade.motherTongue;
                                     row56.getCell(8).value = grade.filipino;
                                     row57.getCell(8).value = grade.english;
@@ -654,9 +699,12 @@ exports.editForm10 = (req, res) => {
                                     row67.getCell(8).value = grade.edukasyonSaPagpapakatao;
                                     row68.getCell(8).value = grade.arabicLanguage;
                                     row69.getCell(8).value = grade.islamicLanguage;
+                                    row85.getCell(8).value = grade.average;
+                                    row89.getCell(8).value = grade.mapeh;
 
                                 }
                                 if (grade.quarter === 'Quarter 2') {
+                                    countGrade++;
                                     row55.getCell(9).value = grade.motherTongue;
                                     row56.getCell(9).value = grade.filipino;
                                     row57.getCell(9).value = grade.english;
@@ -672,9 +720,12 @@ exports.editForm10 = (req, res) => {
                                     row67.getCell(9).value = grade.edukasyonSaPagpapakatao;
                                     row68.getCell(9).value = grade.arabicLanguage;
                                     row69.getCell(9).value = grade.islamicLanguage;
+                                    row85.getCell(9).value = grade.average;
+                                    row89.getCell(9).value = grade.mapeh;
 
                                 }
                                 if (grade.quarter === 'Quarter 3') {
+                                    countGrade++;
                                     row40.getCell(10).value = grade.motherTongue;
                                     row41.getCell(10).value = grade.filipino;
                                     row42.getCell(10).value = grade.english;
@@ -690,9 +741,12 @@ exports.editForm10 = (req, res) => {
                                     row52.getCell(10).value = grade.edukasyonSaPagpapakatao;
                                     row53.getCell(10).value = grade.arabicLanguage;
                                     row54.getCell(10).value = grade.islamicLanguage;
+                                    row85.getCell(10).value = grade.average;
+                                    row89.getCell(10).value = grade.mapeh;
 
                                 }
                                 if (grade.quarter === 'Quarter 4') {
+                                    countGrade++;
                                     row40.getCell(11).value = grade.motherTongue;
                                     row41.getCell(11).value = grade.filipino;
                                     row42.getCell(11).value = grade.english;
@@ -708,10 +762,13 @@ exports.editForm10 = (req, res) => {
                                     row52.getCell(11).value = grade.edukasyonSaPagpapakatao;
                                     row53.getCell(11).value = grade.arabicLanguage;
                                     row54.getCell(11).value = grade.islamicLanguage;
+                                    row85.getCell(11).value = grade.average;
+                                    row89.getCell(11).value = grade.mapeh;
+                                }
+                                if(countGrade === 4){
+                                    console.log('graduated!')
                                 }
                             }
-
-
                         });
                         if (count === result.length) {
                             row1.commit();
@@ -795,32 +852,32 @@ exports.editForm10 = (req, res) => {
                             row79.commit()
                             row80.commit()
                             row81.commit()
-                            return workbook.xlsx.writeFile('new.xlsx');
-
+                            row82.commit()
+                            row83.commit()
+                            row84.commit()
+                            row85.commit()
+                            row86.commit()
+                            row87.commit()
+                            row88.commit()
+                            row89.commit()
+                            return workbook.xlsx.writeFile('uploads/new.xlsx');
 
                         }
                     })
 
                 })
-
-                // File destination.txt will be created or overwritten by default.
-                // let file = 'new.'
-                // file = file.substr(0, file.lastIndexOf(".")) + ".htm";
-                fs.copyFile('new.xlsx', 'newq.pdf', (err) => {
-                if (err) throw err;
-                console.log('source.txt was copied to destination.txt');
-                });
-
+                res.send({status: true, url: 'http://localhost:5000/uploads/new.xlsx', name: response.studentLastName + '_form10' })
         } else {
-            fs.copyFile('new.xlsx', 'newq.pdf', (err) => {
-                if (err) throw err;
-                console.log('source.txt was copied to destination.txt');
-                });
+            // fs.copyFile('new.xlsx', 'newq.pdf', (err) => {
+            //     if (err) throw err;
+            //     console.log('source.txt was copied to destination.txt');
+            //     });
 
-            console.log(err, 'error');
+            // console.log(err, 'error');
+            res.send({status: false})
+
         }
     })
-    res.send({})
 
 }
 

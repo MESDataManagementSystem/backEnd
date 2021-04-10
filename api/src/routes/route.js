@@ -52,7 +52,7 @@ routes.get('/populationStudents', studentController.populationStudents);
 // routes.get('/findAdviser/:id',teacherSideDashboardController.findAdviser)
 
 // edit form10 excel
-routes.get('/form10', workbookController.editForm10)
+routes.get('/form10/:id', workbookController.editForm10)
 routes.get('/form10pdf', workbookController.transferFile)
 routes.get('/viewpdf', viewpdf.msopdf)
 

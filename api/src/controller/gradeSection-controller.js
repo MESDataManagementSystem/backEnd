@@ -71,19 +71,19 @@ exports.deleteSection = (req, res) => {
     })
 }
 
-exports.updateSection = (req, res) => {
-    var data = {
-        gradeLevel: req.body.gradeLevel,
-        sectionName: req.body.sectionName,
-        adviser: req.body.adviser
-    }
-    section.findByIdAndUpdate({ _id: req.params.id }, data, (err, sections) => {
-        if (err) {
-            return res.send({ error: err, status: false });
-        }
-        return res.send({ status: true, data: sections });
-    })
-}
+// exports.updateSection = (req, res) => {
+//     var data = {
+//         gradeLevel: req.body.gradeLevel,
+//         sectionName: req.body.sectionName,
+//         adviser: req.body.adviser
+//     }
+//     section.findByIdAndUpdate({ _id: req.params.id }, data, (err, sections) => {
+//         if (err) {
+//             return res.send({ error: err, status: false });
+//         }
+//         return res.send({ status: true, data: sections });
+//     })
+// }
 
 exports.findStudentGrades = (req, res) => {
     // console.log(req)
@@ -228,7 +228,6 @@ exports.populationTeacher = (req, res) => {
                         }
                     });
                     if (count === teachers.length) {
-
                         listUniqueTeachers.push({ advisory: listTeachers.length })
                         let countAdviser = 0;
                         listAdvisoryData.forEach(element => {
@@ -252,17 +251,27 @@ exports.populationTeacher = (req, res) => {
                                                     count += 1;
                                                 });
                                                 if (count === teachers.length) {
-                                                    count1 = 1;
-                                                    listNonAdvisory.forEach(elements => {
-                                                        teachersInfo.findOne({ _id: elements }, { "_id": 0, lastName: 1, firstName: 1, middleName: 1, nameExt: 1, employeeNumber: 1 }, (err, ress) => {
-                                                            listNonAdvisoryData.push(ress);
-                                                            console.log(ress, 'non advisory')
-                                                            if (count1 == listNonAdvisory.length) {
-                                                                res.send({ data: listUniqueTeachers, advisory: teacherAdvisory, nonAdvisory: listNonAdvisoryData, schoolYear: data.year });
-                                                            }
-                                                            count1 += 1;
-                                                        })
-                                                    });
+                                                    count1 = 0;
+                                                    console.log(listNonAdvisory.length)
+                                                    if(listNonAdvisory.length > 0){
+                                                        listNonAdvisory.forEach(elements => {
+                                                            console.log(count1, ' : ',listNonAdvisory.length )
+                                                            teachersInfo.findOne({ _id: elements }, { _id: 0, lastName: 1, firstName: 1, middleName: 1, nameExt: 1, employeeNumber: 1 }, (err, ress) => {
+                                                                listNonAdvisoryData.push(ress);
+                                                                console.log(ress, 'non advisory')
+                                                                if (count1 === listNonAdvisory.length-1) {
+                                                                     console.log('counting')
+    
+                                                                    res.send({ data: listUniqueTeachers, advisory: teacherAdvisory, nonAdvisory: listNonAdvisoryData, schoolYear: data.year });
+                                                                }
+                                                                count1 += 1;
+                                                            })
+                                                        });
+                                                    }else{
+                                                        res.send({ data: listUniqueTeachers, advisory: teacherAdvisory, nonAdvisory: listNonAdvisoryData, schoolYear: data.year });
+
+                                                    }
+                      
 
                                                 }
 
@@ -276,6 +285,34 @@ exports.populationTeacher = (req, res) => {
                 })
             }
         });
+}
 
+exports.updateSection = (req, res) => {
+    console.log(req.params.id, req.body)
+    section.findOne({ _id: req.params.id }, (err, sections) => {
+        if (err) {
+            return res.status(400).json({ 'msg': err })
+        }
+        console.log(sections)
+        if (sections) {
+            sections.adviser = req.body.adviser
+            section.findByIdAndUpdate({_id: req.params.id}, sections, (err, response) => {
+                if(err){
+                    res.send({status: false, msg: 'Section not found'})
+                }
+                console.log(response)
+                return res.send({data: response})
+            })
+            
+            
+        }
+        // let sectionName = section(req.body)
+        // sectionName.save((err, sections) => {
+        //     if (err) {
+        //         return res.status(400).json({ 'msg': err })
+        //     }
+        //     return res.status(200).json(sections);
+        // })
+    })
 }
 
