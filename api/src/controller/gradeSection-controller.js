@@ -1,5 +1,10 @@
 var section = require("../model/gradeSection-model");
 var subjects = require("../model/subjects-model");
+var studentInfo = require('../model/studentsInfo-model');
+var teachersInfo = require('../model/teachersInfo-model');
+var ObjectId = require('mongodb').ObjectID;
+
+
 
 exports.addSection = (req, res) => {
     section.findOne({ sectionName: req.body.sectionName.toLowerCase() }, (err, sections) => {
@@ -20,8 +25,9 @@ exports.addSection = (req, res) => {
 }
 
 exports.viewSection = (req, res) => {
-    console.log(req.params.id)
-    section.find({ gradeLevel: req.params.id })
+    var sectionsNumber = []
+    // console.log(req.params.grade)
+    section.find({ gradeLevel: req.params.grade })
         .populate({
             path: 'adviser',
             model: 'TeacherInfo',
@@ -31,7 +37,28 @@ exports.viewSection = (req, res) => {
             if (err) {
                 return res.send({ error: err, status: false });
             }
-            return res.send({ status: true, data: section })
+            if (section) {
+                var count = 0;
+                // console.log(section)
+                section.forEach(element => {
+
+                    studentInfo.find({ studentGrade: req.params.grade, studentSection: element.sectionName }, { _id: 1 }, (err, response) => {
+                        sectionsNumber.push({ section: element.sectionName, population: response.length })
+                        console.log(sectionsNumber)
+                        count += 1
+                        console.log(count, section.length)
+                        if (count === section.length) {
+                            console.log(sectionsNumber)
+                            return res.send({ status: true, data: section, population: sectionsNumber })
+                        }
+                    });
+
+
+                });
+
+
+            }
+
         })
 }
 
@@ -44,22 +71,23 @@ exports.deleteSection = (req, res) => {
     })
 }
 
-exports.updateSection = (req, res) => {
-    var data = {
-        gradeLevel: req.body.gradeLevel,
-        sectionName: req.body.sectionName,
-        adviser: req.body.adviser
-    }
-    section.findByIdAndUpdate({ _id: req.params.id }, data, (err, sections) => {
-        if (err) {
-            return res.send({ error: err, status: false });
-        }
-        return res.send({ status: true, data: sections });
-    })
-}
+// exports.updateSection = (req, res) => {
+//     var data = {
+//         gradeLevel: req.body.gradeLevel,
+//         sectionName: req.body.sectionName,
+//         adviser: req.body.adviser
+//     }
+//     section.findByIdAndUpdate({ _id: req.params.id }, data, (err, sections) => {
+//         if (err) {
+//             return res.send({ error: err, status: false });
+//         }
+//         return res.send({ status: true, data: sections });
+//     })
+// }
 
 exports.findStudentGrades = (req, res) => {
-    subjects.findOne({ studentId: req.params.id, quarter: req.body.quarter }, (err, grades) => {
+    // console.log(req)
+    subjects.findOne({ studentId: req.params.id, quarter: req.body.quarter, currentGrade: req.body.grade, section: req.body.section }, (err, grades) => {
         if (err) {
             return res.send({ error: err, status: false })
         }
@@ -68,10 +96,10 @@ exports.findStudentGrades = (req, res) => {
 }
 
 exports.findQuarter = (req, res) => {
-    console.log('nisulod dire')
-    id = req.params.id
-    subjects.find({ studentId: req.params.id.trim() }, (err, subjects) => {
-        console.log(subjects);
+    console.log('nisulod dire', req.body)
+    // id = req.body.id
+    subjects.find({ studentId: req.body.id.trim(), currentGrade: req.body.grade, section: req.body.section }, (err, subjects) => {
+        console.log(subjects, 'subjects');
         if (err) {
             res.send({ error: err, status: false })
         }
@@ -108,7 +136,7 @@ exports.updateStudentGrades = (req, res) => {
 }
 
 exports.addStudentGrades = (req, res) => {
-    subjects.findOne({ studentId: req.body.studentId, quarter: req.body.quarter }, (err, grades) => {
+    subjects.findOne({ studentId: req.body.studentId, quarter: req.body.quarter, currentGrade: req.body.grade }, (err, grades) => {
         if (grades) {
             console.log('existing');
             return res.send({ status: false, msg: 'Can only add once!' })
@@ -123,3 +151,168 @@ exports.addStudentGrades = (req, res) => {
         }
     })
 }
+
+exports.proceedNextGrade = (req, res) => {
+    console.log(req.body)
+    subjects.find({ studentId: req.body.id, grade: req.body.grade }, (err, response) => {
+        console.log(response.length, 'length of response')
+        if (err) {
+            return res.send({ status: false, error: err })
+        }
+        if (response.length === 4) {
+            let count = 0;
+            response.forEach(section => {
+                count += 1
+                section.currentGrade = req.body.grade
+                subjects.findByIdAndUpdate({ _id: section._id }, section, (error, updated) => {
+                    if (error) {
+                        return res.send({ status: false, error: error })
+                    }
+                })
+            });
+            if (count = 4) {
+                studentInfo.findOne({ _id: req.body.id }, (error, result) => {
+                    if (error) {
+                        res.send({ status: false, result: result })
+                    }
+                    if (result) {
+                        result.studentSection = req.body.section
+                        result.studentGrade = req.body.currentGrade
+                        studentInfo.findByIdAndUpdate({ _id: req.body.id, studentGrade: req.body.grade }, result, (err, data) => {
+                            if (err) {
+                                res.send({ status: false, error: err })
+                            }
+                            if (data) {
+                                res.send({ status: true, data: data })
+                            }
+                        })
+                    }
+                })
+                // return res.send({ status: true, data: data })
+            }
+
+        } else {
+            return res.send({ status: false, error: 'Please complete the quarters!' })
+            // console.log('gwapa ko')
+        }
+    })
+
+}
+
+exports.populationTeacher = (req, res) => {
+    const todaysDate = new Date()
+    const currentYear = todaysDate.getFullYear()
+    var listTeachers = []
+    var listNonAdvisory = []
+    var listNonAdvisoryData = []
+    var listAdvisoryData = [];
+    var listUniqueTeachers = []
+    var id = ''
+    let count = 0
+    let teacherAdvisory = []
+    // wla pani nabutngan ug currentYear
+    // section.find().sort({_id:1});
+    section.findOne(
+        {}, { year: 1, _id: 0 },
+        { sort: { _id: -1 } },
+        (err, data) => {
+            console.log(data, 'current');
+            if (data) {
+                section.find({ year: data.year }, { _id: 0 }, (err, teachers) => {
+                    teachers.forEach(teacher => {
+                        count += 1
+                        if (listTeachers.indexOf(JSON.stringify(teacher.adviser)) >= 0) {
+                        } else {
+                            listTeachers.push(JSON.stringify(teacher.adviser))
+                            listAdvisoryData.push(teacher.adviser)
+                        }
+                    });
+                    if (count === teachers.length) {
+                        listUniqueTeachers.push({ advisory: listTeachers.length })
+                        let countAdviser = 0;
+                        listAdvisoryData.forEach(element => {
+                            teachersInfo.findOne({ _id: element }, { _id: 0, lastName: 1, firstName: 1, middleName: 1, nameExt: 1, employeeNumber: 1 }, (err, teacher1) => {
+                                if (err) {
+                                } else {
+                                    section.find({ adviser: element }, { _id: 0, gradeLevel: 1, sectionName: 1 }, (err, result) => {
+                                        teacherAdvisory.push({ adviserName: teacher1, sections: result })
+                                        countAdviser += 1;
+                                        if (countAdviser === listAdvisoryData.length) {
+                                            teachersInfo.find({ activeStatus: "yes" }, { "_id": 1 }, (err, teachers) => {
+                                                listUniqueTeachers.push({ allTeachers: teachers.length })
+                                                listUniqueTeachers.push({ nonAdvisory: teachers.length - listTeachers.length })
+                                                var count = 0;
+                                                teachers.forEach(id => {
+
+                                                    if (listTeachers.indexOf(JSON.stringify(id._id)) >= 0) {
+                                                    } else {
+                                                        listNonAdvisory.push((id._id))
+                                                    }
+                                                    count += 1;
+                                                });
+                                                if (count === teachers.length) {
+                                                    count1 = 0;
+                                                    console.log(listNonAdvisory.length)
+                                                    if(listNonAdvisory.length > 0){
+                                                        listNonAdvisory.forEach(elements => {
+                                                            console.log(count1, ' : ',listNonAdvisory.length )
+                                                            teachersInfo.findOne({ _id: elements }, { _id: 0, lastName: 1, firstName: 1, middleName: 1, nameExt: 1, employeeNumber: 1 }, (err, ress) => {
+                                                                listNonAdvisoryData.push(ress);
+                                                                console.log(ress, 'non advisory')
+                                                                if (count1 === listNonAdvisory.length-1) {
+                                                                     console.log('counting')
+    
+                                                                    res.send({ data: listUniqueTeachers, advisory: teacherAdvisory, nonAdvisory: listNonAdvisoryData, schoolYear: data.year });
+                                                                }
+                                                                count1 += 1;
+                                                            })
+                                                        });
+                                                    }else{
+                                                        res.send({ data: listUniqueTeachers, advisory: teacherAdvisory, nonAdvisory: listNonAdvisoryData, schoolYear: data.year });
+
+                                                    }
+                      
+
+                                                }
+
+                                            })
+                                        }
+                                    })
+                                }
+                            })
+                        });
+                    }
+                })
+            }
+        });
+}
+
+exports.updateSection = (req, res) => {
+    console.log(req.params.id, req.body)
+    section.findOne({ _id: req.params.id }, (err, sections) => {
+        if (err) {
+            return res.status(400).json({ 'msg': err })
+        }
+        console.log(sections)
+        if (sections) {
+            sections.adviser = req.body.adviser
+            section.findByIdAndUpdate({_id: req.params.id}, sections, (err, response) => {
+                if(err){
+                    res.send({status: false, msg: 'Section not found'})
+                }
+                console.log(response)
+                return res.send({data: response})
+            })
+            
+            
+        }
+        // let sectionName = section(req.body)
+        // sectionName.save((err, sections) => {
+        //     if (err) {
+        //         return res.status(400).json({ 'msg': err })
+        //     }
+        //     return res.status(200).json(sections);
+        // })
+    })
+}
+

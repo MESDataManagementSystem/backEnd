@@ -9,7 +9,7 @@ subjects = new mongoose.Schema({
     science: { type: Number, required: false },
     aralingPanlipunan: { type: Number, required: false },
     eppTle: { type: Number, required: false },
-    Mapeh: { type: Number, required: false },
+    mapeh: { type: Number, required: false },
     music: { type: Number, required: false },
     pe: { type: Number, required: false },
     arts: { type: Number, required: false },
@@ -17,7 +17,11 @@ subjects = new mongoose.Schema({
     edukasyonSaPagpapakatao: { type: Number, required: false },
     arabicLanguage: { type: Number, required: false },
     islamicLanguage: { type: Number, required: false },
-    quarter: { type: String, required: true }
+    average: { type: Number, required: false },
+    quarter: { type: String, required: true },
+    grade: { type: String, required: false },
+    section: { type: String, required: false },
+    currentGrade: { type: String, required: false } 
 })
 
 module.exports = mongoose.model("Subjects", subjects);
