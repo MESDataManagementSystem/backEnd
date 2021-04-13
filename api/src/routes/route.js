@@ -27,6 +27,7 @@ routes.post('/addTeachersInfo', teachersInfoController.addTeachersInfo);
 routes.put('/updateTeachersInfo/:id', teachersInfoController.updateTeachersInfo);
 routes.get('/viewTeachersInfo/:id', teachersInfoController.viewTeachersInfo);
 routes.get('/viewListOfTeacher/:activeStatus', teachersInfoController.viewListOfTeachers);
+routes.get('/findAdviser/:id', teachersInfoController.findAdviser);
 
 routes.delete('/deleteSection/:id', gradeSectionController.deleteSection);
 routes.get('/viewSection/:grade', gradeSectionController.viewSection);
@@ -37,6 +38,7 @@ routes.post('/findStudentGrades/:id', gradeSectionController.findStudentGrades);
 routes.post('/updateStudentGrades/:id', gradeSectionController.updateStudentGrades);
 routes.post('/addStudentGrades', gradeSectionController.addStudentGrades);
 routes.get('/teacherPopulation', gradeSectionController.populationTeacher);
+routes.post('/nextgrade/', gradeSectionController.proceedNextGrade)
 
 routes.get('/viewStudents/:section/:grade', studentController.viewStudents);
 routes.get('/generateSection/:section', studentController.createTokenSection);
@@ -48,15 +50,10 @@ routes.post('/updateStudent/:id', studentController.updateStudent);
 routes.post('/addStudent', studentController.addStudent);
 routes.get('/populationStudents', studentController.populationStudents);
 
-// for students (dashboadTeacher)
-// routes.get('/findAdviser/:id',teacherSideDashboardController.findAdviser)
-
 // edit form10 excel
 routes.get('/form10/:id', workbookController.editForm10)
 routes.get('/form10pdf', workbookController.transferFile)
 routes.get('/viewpdf', viewpdf.msopdf)
-
-routes.post('/nextgrade/', gradeSectionController.proceedNextGrade)
 
 routes.get('/findAdviser/:id', teacherSideDashboardController.findAdviser);
 

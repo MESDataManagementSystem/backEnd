@@ -82,6 +82,20 @@ exports.updateTeachersInfo = (req, res) => {
     })
 }
 
-
-
+// Find Adviser With Status
+exports.findAdviser = (req, res) => {
+    section.find({ adviser: ObjectId(req.params.id) }, { _id: 0, gradeLevel: 1, sectionName: 1 }, (err, adviser) => {
+        console.log(req.params.id, "adviser", adviser, "id")
+        if (err) {
+            return res.send({ error: err, status: false })
+        }
+        if (adviser) {
+            if (adviser.length === 0) {
+                res.send({ status: true })
+            } else {
+                res.send({ status: false, data: adviser })
+            }
+        }
+    })
+}
 
