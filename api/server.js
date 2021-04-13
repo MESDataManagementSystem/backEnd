@@ -115,4 +115,4 @@ connection.on('error', (err) => {
 
 // Start the server
 server.listen(port);
-console.log('Mantalongon Elementary School Data Management System is running on http://localhost:' + port);
+console.log('Mantalongon Elementary School Data Management System is running on https://mesfms.herokuapp.com');
