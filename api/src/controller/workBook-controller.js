@@ -137,6 +137,22 @@ exports.editForm10 = (req, res) => {
                             count += 1
                             console.log(grade);
                             if (grade.grade === 'Kindergarten') {
+                                let motherTongue = []
+                                let filipino = []
+                                let english = []
+                                let mathematics = []
+                                let science = []
+                                let aralingPanlipunan = []
+                                let eppTle = []
+                                let mapeh = []
+                                let music = []
+                                let arts = []
+                                let pe = []
+                                let health = []
+                                let edukasyonSaPagpapakatao = []
+                                let arabicLanguage = []
+                                let islamicLanguage = []
+                                let average = []
                                 row6.getCell(4).value = "Mantalongon Elementary School"; //(T-19)) (Z-26) Remark
                                 row6.getCell(19).value = "204512"; //(T-19)) (Z-26) Remark
                                 row7.getCell(4).value = "1 "; //(T-19)) (Z-26) Remark
@@ -148,83 +164,161 @@ exports.editForm10 = (req, res) => {
                                 row9.getCell(8).value = "Yubert Mariscal"; //(T-19)) (Z-26) Remark
                                 if (grade.quarter === 'Quarter 1') {
                                     row10.getCell(11).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row11.getCell(11).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row12.getCell(11).value = grade.english;
+                                    english.push(grade.english)
                                     row13.getCell(11).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row14.getCell(11).value = grade.science;
+                                    science.push(grade.science)
                                     row15.getCell(11).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row16.getCell(11).value = grade.eppTle;
-                                    row17.getCell(11).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row17.getCell(11).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row18.getCell(11).value = grade.music;
+                                    music.push(grade.music)
                                     row19.getCell(11).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row20.getCell(11).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row21.getCell(11).value = grade.health;
+                                    health.push(grade.health)
                                     row22.getCell(11).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row23.getCell(11).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row24.getCell(11).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row82.getCell(11).value = grade.average;
-                                    row86.getCell(11).value = grade.mapeh;
+                                    average.push(grade.average)
+                                    // row10.getCell(12).value = sum then divide
                                 }
                                 if (grade.quarter === 'Quarter 2') {
                                     row10.getCell(12).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row11.getCell(12).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row12.getCell(12).value = grade.english;
+                                    english.push(grade.english)
                                     row13.getCell(12).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row14.getCell(12).value = grade.science;
+                                    science.push(grade.science)
                                     row15.getCell(12).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row16.getCell(12).value = grade.eppTle;
-                                    row17.getCell(12).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row17.getCell(12).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row18.getCell(12).value = grade.music;
+                                    music.push(grade.music)
                                     row19.getCell(12).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row20.getCell(12).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row21.getCell(12).value = grade.health;
+                                    health.push(grade.health)
                                     row22.getCell(12).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row23.getCell(12).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row24.getCell(12).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row82.getCell(12).value = grade.average;
-                                    row86.getCell(12).value = grade.mapeh;
+                                    average.push(grade.average)
                                 }
                                 if (grade.quarter === 'Quarter 3') {
                                     row10.getCell(14).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row11.getCell(14).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row12.getCell(14).value = grade.english;
+                                    english.push(grade.english)
                                     row13.getCell(14).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row14.getCell(14).value = grade.science;
+                                    science.push(grade.science)
                                     row15.getCell(14).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row16.getCell(14).value = grade.eppTle;
-                                    row17.getCell(14).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row17.getCell(14).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row18.getCell(14).value = grade.music;
+                                    music.push(grade.music)
                                     row19.getCell(14).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row20.getCell(14).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row21.getCell(14).value = grade.health;
+                                    health.push(grade.health)
                                     row22.getCell(14).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row23.getCell(14).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row24.getCell(14).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row82.getCell(14).value = grade.average;
-                                    row86.getCell(14).value = grade.mapeh;
+                                    average.push(grade.average)
                                 }
                                 if (grade.quarter === 'Quarter 4') {
                                     row10.getCell(15).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row11.getCell(15).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row12.getCell(15).value = grade.english;
+                                    english.push(grade.english)
                                     row13.getCell(15).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row14.getCell(15).value = grade.science;
+                                    science.push(grade.science)
                                     row15.getCell(15).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row16.getCell(15).value = grade.eppTle;
-                                    row17.getCell(15).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row17.getCell(15).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row18.getCell(15).value = grade.music;
+                                    music.push(grade.music)
                                     row19.getCell(15).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row20.getCell(15).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row21.getCell(15).value = grade.health;
+                                    health.push(grade.health)
                                     row22.getCell(15).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row23.getCell(15).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row24.getCell(15).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row82.getCell(15).value = grade.average;
-                                    row86.getCell(15).value = grade.mapeh;
+                                     average.push(grade.average)
+                                  
                                 }
 
                             }
                             if (grade.grade === 'Grade 1') {
+                                let motherTongue = []
+                                let filipino = []
+                                let english = []
+                                let mathematics = []
+                                let science = []
+                                let aralingPanlipunan = []
+                                let eppTle = []
+                                let mapeh = []
+                                let music = []
+                                let arts = []
+                                let pe = []
+                                let health = []
+                                let edukasyonSaPagpapakatao = []
+                                let arabicLanguage = []
+                                let islamicLanguage = []
+                                let average = []
                                 row6.getCell(24).value = "Mantalongon Elementary School"; //(T-19)) (Z-26) Remark
                                 row6.getCell(48).value = "204512"; //(T-19)) (Z-26) Remark
                                 row7.getCell(30).value = "1 "; //(T-19)) (Z-26) Remark
@@ -236,82 +330,158 @@ exports.editForm10 = (req, res) => {
                                 row9.getCell(29).value = "Yubert Mariscal"; //(T-19)) (Z-26) Remark
                                 if (grade.quarter === 'Quarter 1') {
                                     row10.getCell(36).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row11.getCell(36).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row12.getCell(36).value = grade.english;
+                                    english.push(grade.english)
                                     row13.getCell(36).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row14.getCell(36).value = grade.science;
+                                    science.push(grade.science)
                                     row15.getCell(36).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row16.getCell(36).value = grade.eppTle;
-                                    row17.getCell(36).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row17.getCell(36).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row18.getCell(36).value = grade.music;
+                                    music.push(grade.music)
                                     row19.getCell(36).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row20.getCell(36).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row21.getCell(36).value = grade.health;
+                                    health.push(grade.health)
                                     row22.getCell(36).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row23.getCell(36).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row24.getCell(36).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row82.getCell(36).value = grade.average;
-                                    row86.getCell(36).value = grade.mapeh;
+                                    average.push(grade.average)
                                 }
                                 if (grade.quarter === 'Quarter 2') {
                                     row10.getCell(39).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row11.getCell(39).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row12.getCell(39).value = grade.english;
+                                    english.push(grade.english)
                                     row13.getCell(39).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row14.getCell(39).value = grade.science;
+                                    science.push(grade.science)
                                     row15.getCell(39).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row16.getCell(39).value = grade.eppTle;
-                                    row17.getCell(39).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row17.getCell(39).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row18.getCell(39).value = grade.music;
+                                    music.push(grade.music)
                                     row19.getCell(39).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row20.getCell(39).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row21.getCell(39).value = grade.health;
+                                    health.push(grade.health)
                                     row22.getCell(39).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row23.getCell(39).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row24.getCell(39).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row82.getCell(39).value = grade.average;
-                                    row86.getCell(39).value = grade.mapeh;
+                                    average.push(grade.average)
                                 }
                                 if (grade.quarter === 'Quarter 3') {
                                     row10.getCell(41).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row11.getCell(41).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row12.getCell(41).value = grade.english;
+                                    english.push(grade.english)
                                     row13.getCell(41).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row14.getCell(41).value = grade.science;
+                                    science.push(grade.science)
                                     row15.getCell(41).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row16.getCell(41).value = grade.eppTle;
-                                    row17.getCell(41).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row17.getCell(41).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row18.getCell(41).value = grade.music;
+                                    music.push(grade.music)
                                     row19.getCell(41).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row20.getCell(41).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row21.getCell(41).value = grade.health;
+                                    health.push(grade.health)
                                     row22.getCell(41).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row23.getCell(41).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row24.getCell(41).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row82.getCell(41).value = grade.average;
-                                    row86.getCell(41).value = grade.mapeh;
+                                     average.push(grade.average)
                                 }
                                 if (grade.quarter === 'Quarter 4') {
                                     row10.getCell(44).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row11.getCell(44).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row12.getCell(44).value = grade.english;
+                                    english.push(grade.english)
                                     row13.getCell(44).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row14.getCell(44).value = grade.science;
+                                    science.push(grade.science)
                                     row15.getCell(44).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row16.getCell(44).value = grade.eppTle;
-                                    row17.getCell(44).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row17.getCell(44).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row18.getCell(44).value = grade.music;
+                                    music.push(grade.music)
                                     row19.getCell(44).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row20.getCell(44).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row21.getCell(44).value = grade.health;
+                                    health.push(grade.health)
                                     row22.getCell(44).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row23.getCell(44).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row24.getCell(44).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row82.getCell(44).value = grade.average;
-                                    row86.getCell(44).value = grade.mapeh;
+                                    average.push(grade.average)
                                 }
                             }
                             if (grade.grade === 'Grade 2') {
+                                let motherTongue = []
+                                let filipino = []
+                                let english = []
+                                let mathematics = []
+                                let science = []
+                                let aralingPanlipunan = []
+                                let eppTle = []
+                                let mapeh = []
+                                let music = []
+                                let arts = []
+                                let pe = []
+                                let health = []
+                                let edukasyonSaPagpapakatao = []
+                                let arabicLanguage = []
+                                let islamicLanguage = []
+                                let average = []
                                 row70.getCell(4).value = "Mantalongon Elementary School"; //(T-19)) (Z-26) Remark
                                 row70.getCell(19).value = "204512"; //(T-19)) (Z-26) Remark
                                 row71.getCell(4).value = "1 "; //(T-19)) (Z-26) Remark
@@ -323,85 +493,161 @@ exports.editForm10 = (req, res) => {
                                 row73.getCell(8).value = "Yubert Mariscal"; //(T-19)) (Z-26) Remark
                                 if (grade.quarter === 'Quarter 1') {
                                     row25.getCell(11).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row26.getCell(11).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row27.getCell(11).value = grade.english;
+                                    english.push(grade.english)
                                     row28.getCell(11).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row29.getCell(11).value = grade.science;
+                                    science.push(grade.science)
                                     row30.getCell(11).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row31.getCell(11).value = grade.eppTle;
-                                    row32.getCell(11).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row32.getCell(11).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row33.getCell(11).value = grade.music;
+                                    music.push(grade.music)
                                     row34.getCell(11).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row35.getCell(11).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row36.getCell(11).value = grade.health;
+                                    health.push(grade.health)
                                     row37.getCell(11).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row38.getCell(11).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row39.getCell(11).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row83.getCell(11).value = grade.average;
-                                    row87.getCell(11).value = grade.mapeh;
+                                    average.push(grade.average)
 
                                 }
                                 if (grade.quarter === 'Quarter 2') {
                                     row25.getCell(12).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row26.getCell(12).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row27.getCell(12).value = grade.english;
+                                    english.push(grade.english)
                                     row28.getCell(12).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row29.getCell(12).value = grade.science;
+                                    science.push(grade.science)
                                     row30.getCell(12).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row31.getCell(12).value = grade.eppTle;
-                                    row32.getCell(12).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row32.getCell(12).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row33.getCell(12).value = grade.music;
+                                    music.push(grade.music)
                                     row34.getCell(12).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row35.getCell(12).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row36.getCell(12).value = grade.health;
+                                    health.push(grade.health)
                                     row37.getCell(12).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row38.getCell(12).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row39.getCell(12).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row83.getCell(12).value = grade.average;
-                                    row87.getCell(12).value = grade.mapeh;
+                                    average.push(grade.average)
 
 
                                 }
                                 if (grade.quarter === 'Quarter 3') {
                                     row25.getCell(14).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row26.getCell(14).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row27.getCell(14).value = grade.english;
+                                    english.push(grade.english)
                                     row28.getCell(14).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row29.getCell(14).value = grade.science;
+                                    science.push(grade.science)
                                     row30.getCell(14).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row31.getCell(14).value = grade.eppTle;
-                                    row32.getCell(14).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row32.getCell(14).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row33.getCell(14).value = grade.music;
+                                    music.push(grade.music)
                                     row34.getCell(14).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row35.getCell(14).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row36.getCell(14).value = grade.health;
+                                    health.push(grade.health)
                                     row37.getCell(14).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row38.getCell(14).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row39.getCell(14).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row83.getCell(14).value = grade.average;
-                                    row87.getCell(14).value = grade.mapeh;
+                                     average.push(grade.average)
                                 }
                                 if (grade.quarter === 'Quarter 4') {
                                     row25.getCell(15).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row26.getCell(15).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row27.getCell(15).value = grade.english;
+                                    english.push(grade.english)
                                     row28.getCell(15).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row29.getCell(15).value = grade.science;
+                                    science.push(grade.science)
                                     row30.getCell(15).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row31.getCell(15).value = grade.eppTle;
-                                    row32.getCell(15).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row32.getCell(15).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row33.getCell(15).value = grade.music;
+                                    music.push(grade.music)
                                     row34.getCell(15).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row35.getCell(15).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row36.getCell(15).value = grade.health;
+                                    health.push(grade.health)
                                     row37.getCell(15).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row38.getCell(15).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row39.getCell(15).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row83.getCell(15).value = grade.average;
-                                    row87.getCell(15).value = grade.mapeh;
+                                     average.push(grade.average)
                                 }
                             }
                             if (grade.grade === 'Grade 3') {
+                                let motherTongue = []
+                                let filipino = []
+                                let english = []
+                                let mathematics = []
+                                let science = []
+                                let aralingPanlipunan = []
+                                let eppTle = []
+                                let mapeh = []
+                                let music = []
+                                let arts = []
+                                let pe = []
+                                let health = []
+                                let edukasyonSaPagpapakatao = []
+                                let arabicLanguage = []
+                                let islamicLanguage = []
+                                let average = []
                                 row70.getCell(24).value = "Mantalongon Elementary School"; //(T-19)) (Z-26) Remark
                                 row70.getCell(48).value = "204512"; //(T-19)) (Z-26) Remark
                                 row71.getCell(30).value = "1 "; //(T-19)) (Z-26) Remark
@@ -413,83 +659,160 @@ exports.editForm10 = (req, res) => {
                                 row73.getCell(29).value = "Yubert Mariscal"; //(T-19)) (Z-26) Remark
                                 if (grade.quarter === 'Quarter 1') {
                                     row25.getCell(36).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row26.getCell(36).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row27.getCell(36).value = grade.english;
+                                    english.push(grade.english)
                                     row28.getCell(36).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row29.getCell(36).value = grade.science;
+                                    science.push(grade.science)
                                     row30.getCell(36).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row31.getCell(36).value = grade.eppTle;
-                                    row32.getCell(36).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row32.getCell(36).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row33.getCell(36).value = grade.music;
+                                    music.push(grade.music)
                                     row34.getCell(36).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row35.getCell(36).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row36.getCell(36).value = grade.health;
+                                    health.push(grade.health)
                                     row37.getCell(36).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row38.getCell(36).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row39.getCell(36).value = grade.islamicLanguage;
-                                    row87.getCell(36).value = grade.mapeh;
+                                    islamicLanguage.push( grade.islamicLanguage)
+                                    row83.getCell(36).value = grade.average;
+                                    average.push(grade.average)
                                 }
                                 if (grade.quarter === 'Quarter 2') {
                                     row25.getCell(39).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row26.getCell(39).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row27.getCell(39).value = grade.english;
+                                    english.push(grade.english)
                                     row28.getCell(39).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row29.getCell(39).value = grade.science;
+                                    science.push(grade.science)
                                     row30.getCell(39).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row31.getCell(39).value = grade.eppTle;
-                                    row32.getCell(39).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row32.getCell(39).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row33.getCell(39).value = grade.music;
+                                    music.push(grade.music)
                                     row34.getCell(39).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row35.getCell(39).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row36.getCell(39).value = grade.health;
+                                    health.push(grade.health)
                                     row37.getCell(39).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row38.getCell(39).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row39.getCell(39).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row83.getCell(39).value = grade.average;
-                                    row87.getCell(39).value = grade.mapeh;
+                                     average.push(grade.average)
 
 
                                 }
                                 if (grade.quarter === 'Quarter 3') {
                                     row25.getCell(41).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row26.getCell(41).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row27.getCell(41).value = grade.english;
+                                    english.push(grade.english)
                                     row28.getCell(41).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row29.getCell(41).value = grade.science;
+                                    science.push(grade.science)
                                     row30.getCell(41).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row31.getCell(41).value = grade.eppTle;
-                                    row32.getCell(41).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row32.getCell(41).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row33.getCell(41).value = grade.music;
+                                    music.push(grade.music)
                                     row34.getCell(41).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row35.getCell(41).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row36.getCell(41).value = grade.health;
+                                    health.push(grade.health)
                                     row37.getCell(41).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row38.getCell(41).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row39.getCell(41).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row83.getCell(41).value = grade.average;
-                                    row87.getCell(41).value = grade.mapeh;
+                                     average.push(grade.average)
                                 }
                                 if (grade.quarter === 'Quarter 4') {
                                     row25.getCell(44).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row26.getCell(44).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row27.getCell(44).value = grade.english;
+                                    english.push(grade.english)
                                     row28.getCell(44).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row29.getCell(44).value = grade.science;
+                                    science.push(grade.science)
                                     row30.getCell(44).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row31.getCell(44).value = grade.eppTle;
-                                    row32.getCell(44).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row32.getCell(44).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row33.getCell(44).value = grade.music;
+                                    music.push(grade.music)
                                     row34.getCell(44).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row35.getCell(44).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row36.getCell(44).value = grade.health;
+                                    health.push(grade.health)
                                     row37.getCell(44).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row38.getCell(44).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row39.getCell(44).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row83.getCell(44).value = grade.average;
-                                    row87.getCell(44).value = grade.mapeh;
+                                     average.push(grade.average)
                                 }
                             }
                             if (grade.grade === 'Grade 4') {
+                                let motherTongue = []
+                                let filipino = []
+                                let english = []
+                                let mathematics = []
+                                let science = []
+                                let aralingPanlipunan = []
+                                let eppTle = []
+                                let mapeh = []
+                                let music = []
+                                let arts = []
+                                let pe = []
+                                let health = []
+                                let edukasyonSaPagpapakatao = []
+                                let arabicLanguage = []
+                                let islamicLanguage = []
+                                let average = []
                                 row74.getCell(4).value = "Mantalongon Elementary School"; //(T-19)) (Z-26) Remark
                                 row74.getCell(15).value = "204512"; //(T-19)) (Z-26) Remark
                                 row75.getCell(4).value = "1"; //(T-19)) (Z-26) Remark
@@ -502,87 +825,164 @@ exports.editForm10 = (req, res) => {
                                 if (grade.quarter === 'Quarter 1') {
                                     if (grade.quarter === 'Quarter 1') {
                                         row40.getCell(8).value = grade.motherTongue;
+                                        motherTongue.push(grade.motherTongue)
                                         row41.getCell(8).value = grade.filipino;
+                                        filipino.push(grade.filipino)
                                         row42.getCell(8).value = grade.english;
+                                        english.push(grade.english)
                                         row43.getCell(8).value = grade.mathematics;
+                                        mathematics.push(grade.mathematics)
                                         row44.getCell(8).value = grade.science;
+                                        science.push(grade.science)
                                         row45.getCell(8).value = grade.aralingPanlipunan;
+                                        aralingPanlipunan.push(grade.aralingPanlipunan)
                                         row46.getCell(8).value = grade.eppTle;
-                                        row47.getCell(8).value = grade.Mapeh;
+                                        eppTle.push(grade.eppTle)
+                                        row47.getCell(8).value = grade.mapeh;
+                                        mapeh.push(grade.mapeh)
                                         row48.getCell(8).value = grade.music;
+                                        music.push(grade.music)
                                         row49.getCell(8).value = grade.arts;
+                                        arts.push(grade.arts)
                                         row50.getCell(8).value = grade.pe;
+                                        pe.push(grade.pe)
                                         row51.getCell(8).value = grade.health;
+                                        health.push(grade.health)
                                         row52.getCell(8).value = grade.edukasyonSaPagpapakatao;
+                                        edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                         row53.getCell(8).value = grade.arabicLanguage;
+                                        arabicLanguage.push(grade.arabicLanguage)
                                         row54.getCell(8).value = grade.islamicLanguage;
+                                        islamicLanguage.push( grade.islamicLanguage)
                                         row54.getCell(8).value = grade.islamicLanguage;
+                                        islamicLanguage.push( grade.islamicLanguage)
                                         row84.getCell(8).value = grade.average;
-                                        row88.getCell(8).value = grade.mapeh;
+                                         average.push(grade.average)
 
                                     }
                                     if (grade.quarter === 'Quarter 2') {
                                         row40.getCell(9).value = grade.motherTongue;
+                                        motherTongue.push(grade.motherTongue)
                                         row41.getCell(9).value = grade.filipino;
+                                        filipino.push(grade.filipino)
                                         row42.getCell(9).value = grade.english;
+                                        english.push(grade.english)
                                         row43.getCell(9).value = grade.mathematics;
+                                        mathematics.push(grade.mathematics)
                                         row44.getCell(9).value = grade.science;
+                                        science.push(grade.science)
                                         row45.getCell(9).value = grade.aralingPanlipunan;
+                                        aralingPanlipunan.push(grade.aralingPanlipunan)
                                         row46.getCell(9).value = grade.eppTle;
-                                        row47.getCell(9).value = grade.Mapeh;
+                                        eppTle.push(grade.eppTle)
+                                        row47.getCell(9).value = grade.mapeh;
+                                        mapeh.push(grade.mapeh)
                                         row48.getCell(9).value = grade.music;
+                                        music.push(grade.music)
                                         row49.getCell(9).value = grade.arts;
+                                        arts.push(grade.arts)
                                         row50.getCell(9).value = grade.pe;
+                                        pe.push(grade.pe)
                                         row51.getCell(9).value = grade.health;
+                                        health.push(grade.health)
                                         row52.getCell(9).value = grade.edukasyonSaPagpapakatao;
+                                        edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                         row53.getCell(9).value = grade.arabicLanguage;
+                                        arabicLanguage.push(grade.arabicLanguage)
                                         row54.getCell(9).value = grade.islamicLanguage;
+                                        islamicLanguage.push( grade.islamicLanguage)
                                         row84.getCell(9).value = grade.average;
-                                        row88.getCell(9).value = grade.mapeh;
+                                         average.push(grade.average)
 
                                     }
                                     if (grade.quarter === 'Quarter 3') {
                                         row40.getCell(10).value = grade.motherTongue;
+                                        motherTongue.push(grade.motherTongue)
                                         row41.getCell(10).value = grade.filipino;
+                                        filipino.push(grade.filipino)
                                         row42.getCell(10).value = grade.english;
+                                        english.push(grade.english)
                                         row43.getCell(10).value = grade.mathematics;
+                                        mathematics.push(grade.mathematics)
                                         row44.getCell(10).value = grade.science;
+                                        science.push(grade.science)
                                         row45.getCell(10).value = grade.aralingPanlipunan;
+                                        aralingPanlipunan.push(grade.aralingPanlipunan)
                                         row46.getCell(10).value = grade.eppTle;
-                                        row47.getCell(10).value = grade.Mapeh;
+                                        eppTle.push(grade.eppTle)
+                                        row47.getCell(10).value = grade.mapeh;
+                                        mapeh.push(grade.mapeh)
                                         row48.getCell(10).value = grade.music;
+                                        music.push(grade.music)
                                         row49.getCell(10).value = grade.arts;
+                                        arts.push(grade.arts)
                                         row50.getCell(10).value = grade.pe;
+                                        pe.push(grade.pe)
                                         row51.getCell(10).value = grade.health;
+                                        health.push(grade.health)
                                         row52.getCell(10).value = grade.edukasyonSaPagpapakatao;
+                                        edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                         row53.getCell(10).value = grade.arabicLanguage;
+                                        arabicLanguage.push(grade.arabicLanguage)
                                         row54.getCell(10).value = grade.islamicLanguage;
+                                        islamicLanguage.push( grade.islamicLanguage)
                                         row84.getCell(10).value = grade.average;
-                                        row88.getCell(10).value = grade.mapeh;
+                                         average.push(grade.average)
 
                                     }
                                     if (grade.quarter === 'Quarter 4') {
                                         row40.getCell(11).value = grade.motherTongue;
+                                        motherTongue.push(grade.motherTongue)
                                         row41.getCell(11).value = grade.filipino;
+                                        filipino.push(grade.filipino)
                                         row42.getCell(11).value = grade.english;
+                                        english.push(grade.english)
                                         row43.getCell(11).value = grade.mathematics;
+                                        mathematics.push(grade.mathematics)
                                         row44.getCell(11).value = grade.science;
+                                        science.push(grade.science)
                                         row45.getCell(11).value = grade.aralingPanlipunan;
+                                        aralingPanlipunan.push(grade.aralingPanlipunan)
                                         row46.getCell(11).value = grade.eppTle;
-                                        row47.getCell(11).value = grade.Mapeh;
+                                        eppTle.push(grade.eppTle)
+                                        row47.getCell(11).value = grade.mapeh;
+                                        mapeh.push(grade.mapeh)
                                         row48.getCell(11).value = grade.music;
+                                        music.push(grade.music)
                                         row49.getCell(11).value = grade.arts;
+                                        arts.push(grade.arts)
                                         row50.getCell(11).value = grade.pe;
+                                        pe.push(grade.pe)
                                         row51.getCell(11).value = grade.health;
+                                        health.push(grade.health)
                                         row52.getCell(11).value = grade.edukasyonSaPagpapakatao;
+                                        edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                         row53.getCell(11).value = grade.arabicLanguage;
+                                        arabicLanguage.push(grade.arabicLanguage)
                                         row54.getCell(11).value = grade.islamicLanguage;
+                                        islamicLanguage.push( grade.islamicLanguage)
                                         row84.getCell(11).value = grade.average;
-                                        row88.getCell(11).value = grade.mapeh;
+                                        average.push(grade.average)
                                     }
                                 }
                             }
                             if (grade.grade === 'Grade 5') {
+                                let motherTongue = []
+                                let filipino = []
+                                let english = []
+                                let mathematics = []
+                                let science = []
+                                let aralingPanlipunan = []
+                                let eppTle = []
+                                let mapeh = []
+                                let music = []
+                                let arts = []
+                                let pe = []
+                                let health = []
+                                let edukasyonSaPagpapakatao = []
+                                let arabicLanguage = []
+                                let islamicLanguage = []
+                                let average = []
                                 row74.getCell(20).value = "Mantalongon Elementary School"; //(T-19)) (Z-26) Remark
                                 row74.getCell(33).value = "204512"; //(T-19)) (Z-26) Remark
                                 row75.getCell(20).value = "1"; //(T-19)) (Z-26) Remark
@@ -594,84 +994,160 @@ exports.editForm10 = (req, res) => {
                                 row77.getCell(22).value = "Yubert Mariscal"; //(T-19)) (Z-26) Remark
                                 if (grade.quarter === 'Quarter 1') {
                                     row40.getCell(28).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row41.getCell(28).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row42.getCell(28).value = grade.english;
+                                    english.push(grade.english)
                                     row43.getCell(28).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row44.getCell(28).value = grade.science;
+                                    science.push(grade.science)
                                     row45.getCell(28).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row46.getCell(28).value = grade.eppTle;
-                                    row47.getCell(28).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row47.getCell(28).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row48.getCell(28).value = grade.music;
+                                    music.push(grade.music)
                                     row49.getCell(28).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row50.getCell(28).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row51.getCell(28).value = grade.health;
+                                    health.push(grade.health)
                                     row52.getCell(28).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row53.getCell(28).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row54.getCell(28).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row84.getCell(28).value = grade.average;
-                                    row88.getCell(28).value = grade.mapeh;
+                                     average.push(grade.average)
                                 }
                                 if (grade.quarter === 'Quarter 2') {
                                     row40.getCell(30).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row41.getCell(30).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row42.getCell(30).value = grade.english;
+                                    english.push(grade.english)
                                     row43.getCell(30).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row44.getCell(30).value = grade.science;
+                                    science.push(grade.science)
                                     row45.getCell(30).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row46.getCell(30).value = grade.eppTle;
-                                    row47.getCell(30).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row47.getCell(30).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row48.getCell(30).value = grade.music;
+                                    music.push(grade.music)
                                     row49.getCell(30).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row50.getCell(30).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row51.getCell(30).value = grade.health;
+                                    health.push(grade.health)
                                     row52.getCell(30).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row53.getCell(30).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row54.getCell(30).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row84.getCell(30).value = grade.average;
-                                    row88.getCell(30).value = grade.mapeh;
+                                    average.push(grade.average)
 
                                 }
                                 if (grade.quarter === 'Quarter 3') {
                                     row40.getCell(32).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row41.getCell(32).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row42.getCell(32).value = grade.english;
+                                    english.push(grade.english)
                                     row43.getCell(32).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row44.getCell(32).value = grade.science;
+                                    science.push(grade.science)
                                     row45.getCell(32).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row46.getCell(32).value = grade.eppTle;
-                                    row47.getCell(32).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row47.getCell(32).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row48.getCell(32).value = grade.music;
+                                    music.push(grade.music)
                                     row49.getCell(32).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row50.getCell(32).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row51.getCell(32).value = grade.health;
+                                    health.push(grade.health)
                                     row52.getCell(32).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row53.getCell(32).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row54.getCell(32).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row84.getCell(32).value = grade.average;
-                                    row88.getCell(32).value = grade.mapeh;
+                                    average.push(grade.average)
 
                                 }
                                 if (grade.quarter === 'Quarter 4') {
                                     row40.getCell(33).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row41.getCell(33).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row42.getCell(33).value = grade.english;
+                                    english.push(grade.english)
                                     row43.getCell(33).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row44.getCell(33).value = grade.science;
+                                    science.push(grade.science)
                                     row45.getCell(33).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row46.getCell(33).value = grade.eppTle;
-                                    row47.getCell(33).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row47.getCell(33).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row48.getCell(33).value = grade.music;
+                                    music.push(grade.music)
                                     row49.getCell(33).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row50.getCell(33).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row51.getCell(33).value = grade.health;
+                                    health.push(grade.health)
                                     row52.getCell(33).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row53.getCell(33).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row54.getCell(33).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row84.getCell(33).value = grade.average;
-                                    row88.getCell(33).value = grade.mapeh;
+                                    average.push(grade.average)
                                 }
                             }
                             if (grade.grade === 'Grade 6') {
+                                let motherTongue = []
+                                let filipino = []
+                                let english = []
+                                let mathematics = []
+                                let science = []
+                                let aralingPanlipunan = []
+                                let eppTle = []
+                                let mapeh = []
+                                let music = []
+                                let arts = []
+                                let pe = []
+                                let health = []
+                                let edukasyonSaPagpapakatao = []
+                                let arabicLanguage = []
+                                let islamicLanguage = []
+                                let average = []
                                 let countGrade = 0;
                                 row78.getCell(4).value = "Mantalongon Elementary School"; //(T-19)) (Z-26) Remark
                                 row78.getCell(15).value = "204512"; //(T-19)) (Z-26) Remark
@@ -685,85 +1161,145 @@ exports.editForm10 = (req, res) => {
                                 if (grade.quarter === 'Quarter 1') {
                                     countGrade++;
                                     row55.getCell(8).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row56.getCell(8).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row57.getCell(8).value = grade.english;
+                                    english.push(grade.english)
                                     row58.getCell(8).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row59.getCell(8).value = grade.science;
+                                    science.push(grade.science)
                                     row60.getCell(8).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row61.getCell(8).value = grade.eppTle;
-                                    row62.getCell(8).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row62.getCell(8).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row63.getCell(8).value = grade.music;
+                                    music.push(grade.music)
                                     row64.getCell(8).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row65.getCell(8).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row66.getCell(8).value = grade.health;
+                                    health.push(grade.health)
                                     row67.getCell(8).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row68.getCell(8).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row69.getCell(8).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row85.getCell(8).value = grade.average;
-                                    row89.getCell(8).value = grade.mapeh;
+                                    average.push(grade.average)
 
                                 }
                                 if (grade.quarter === 'Quarter 2') {
                                     countGrade++;
                                     row55.getCell(9).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row56.getCell(9).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row57.getCell(9).value = grade.english;
+                                    english.push(grade.english)
                                     row58.getCell(9).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row59.getCell(9).value = grade.science;
+                                    science.push(grade.science)
                                     row60.getCell(9).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row61.getCell(9).value = grade.eppTle;
-                                    row62.getCell(9).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row62.getCell(9).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row63.getCell(9).value = grade.music;
+                                    music.push(grade.music)
                                     row64.getCell(9).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row65.getCell(9).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row66.getCell(9).value = grade.health;
+                                    health.push(grade.health)
                                     row67.getCell(9).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row68.getCell(9).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row69.getCell(9).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row85.getCell(9).value = grade.average;
-                                    row89.getCell(9).value = grade.mapeh;
+                                    average.push(grade.average)
 
                                 }
                                 if (grade.quarter === 'Quarter 3') {
                                     countGrade++;
                                     row40.getCell(10).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row41.getCell(10).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row42.getCell(10).value = grade.english;
+                                    english.push(grade.english)
                                     row43.getCell(10).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row44.getCell(10).value = grade.science;
+                                    science.push(grade.science)
                                     row45.getCell(10).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row46.getCell(10).value = grade.eppTle;
-                                    row47.getCell(10).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row47.getCell(10).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row48.getCell(10).value = grade.music;
+                                    music.push(grade.music)
                                     row49.getCell(10).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row50.getCell(10).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row51.getCell(10).value = grade.health;
+                                    health.push(grade.health)
                                     row52.getCell(10).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row53.getCell(10).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row54.getCell(10).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row85.getCell(10).value = grade.average;
-                                    row89.getCell(10).value = grade.mapeh;
+                                     average.push(grade.average)
 
                                 }
                                 if (grade.quarter === 'Quarter 4') {
                                     countGrade++;
                                     row40.getCell(11).value = grade.motherTongue;
+                                    motherTongue.push(grade.motherTongue)
                                     row41.getCell(11).value = grade.filipino;
+                                    filipino.push(grade.filipino)
                                     row42.getCell(11).value = grade.english;
+                                    english.push(grade.english)
                                     row43.getCell(11).value = grade.mathematics;
+                                    mathematics.push(grade.mathematics)
                                     row44.getCell(11).value = grade.science;
+                                    science.push(grade.science)
                                     row45.getCell(11).value = grade.aralingPanlipunan;
+                                    aralingPanlipunan.push(grade.aralingPanlipunan)
                                     row46.getCell(11).value = grade.eppTle;
-                                    row47.getCell(11).value = grade.Mapeh;
+                                    eppTle.push(grade.eppTle)
+                                    row47.getCell(11).value = grade.mapeh;
+                                    mapeh.push(grade.mapeh)
                                     row48.getCell(11).value = grade.music;
+                                    music.push(grade.music)
                                     row49.getCell(11).value = grade.arts;
+                                    arts.push(grade.arts)
                                     row50.getCell(11).value = grade.pe;
+                                    pe.push(grade.pe)
                                     row51.getCell(11).value = grade.health;
+                                    health.push(grade.health)
                                     row52.getCell(11).value = grade.edukasyonSaPagpapakatao;
+                                    edukasyonSaPagpapakatao.push(grade.edukasyonSaPagpapakatao)
                                     row53.getCell(11).value = grade.arabicLanguage;
+                                    arabicLanguage.push(grade.arabicLanguage)
                                     row54.getCell(11).value = grade.islamicLanguage;
+                                    islamicLanguage.push( grade.islamicLanguage)
                                     row85.getCell(11).value = grade.average;
-                                    row89.getCell(11).value = grade.mapeh;
+                                     average.push(grade.average)
                                 }
                                 if(countGrade === 4){
                                     console.log('graduated!')
@@ -866,7 +1402,7 @@ exports.editForm10 = (req, res) => {
                     })
 
                 })
-                res.send({status: true, url: 'http://localhost:5000/uploads/new.xlsx', name: response.studentLastName + '_form10' })
+                res.send({status: true, url: 'https://mesfms.herokuapp.com/uploads/new.xlsx', name: response.studentLastName + '_form10' })
         } else {
             // fs.copyFile('new.xlsx', 'newq.pdf', (err) => {
             //     if (err) throw err;
@@ -882,8 +1418,8 @@ exports.editForm10 = (req, res) => {
 }
 
 exports.transferFile = (req, res) => {
-    var template = 'http://localhost:5000/api/new';
-    var pdfPath = 'http://localhost:5000/uploads/form11';
+    var template = 'https://mesfms.herokuapp.com/api/new';
+    var pdfPath = 'https://mesfms.herokuapp.com/uploads/form11';
     var option = {
 
         paperSize: {
@@ -897,6 +1433,6 @@ exports.transferFile = (req, res) => {
     res.send(pdfMaker)
     // let convertApi = ConvertApi.auth({ secret: '<YOUR SECRET HERE>' })
     // let params = convertApi.createParams()
-    // params.add('http://localhost:5000/api/new.xlsx', elFileInput.files[0]);
+    // params.add('https://mesfms.herokuapp.com/api/new.xlsx', elFileInput.files[0]);
     // let result = convertApi.convert('xls', 'pdf', params)
 } 

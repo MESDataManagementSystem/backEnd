@@ -220,3 +220,4 @@ exports.teacherNoAccount = (function (req, res) {
         return res.send(teachersNoAccount);
     })
 });
+
